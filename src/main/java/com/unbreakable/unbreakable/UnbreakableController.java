@@ -23,6 +23,12 @@ public class UnbreakableController {
     @Autowired
     UnbreakableService unbreakableService;
 
+    @Autowired
+    DisciplinesRepository disciplinesRepository;
+
+    @Autowired
+    ElementsRepository elementsRepository;
+
 
 
 
@@ -96,6 +102,16 @@ public class UnbreakableController {
     @RequestMapping("/{discipline}/{group}/{level}")
     public List getEx(@PathVariable String discipline, @PathVariable List<String> group, @PathVariable List<Integer> level){
         return unbreakableService.getExercices(discipline, group, level);
+    }
+
+    @RequestMapping("/disciplines")
+    public List getDisciplines(){
+        return disciplinesRepository.findAll();
+    }
+
+    @RequestMapping("/elements")
+    public List getElements(){
+        return elementsRepository.findAll();
     }
 
 }
