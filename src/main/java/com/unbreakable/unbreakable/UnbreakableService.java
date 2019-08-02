@@ -55,5 +55,7 @@ public class UnbreakableService {
                         .collect(Collectors.toList());
             }
         }
+
+        return null;
     }
 }
