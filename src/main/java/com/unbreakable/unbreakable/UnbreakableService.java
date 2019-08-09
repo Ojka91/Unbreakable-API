@@ -1,11 +1,13 @@
 package com.unbreakable.unbreakable;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class UnbreakableService {
 
     @Autowired
