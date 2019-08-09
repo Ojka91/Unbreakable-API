@@ -19,6 +19,12 @@ public class UnbreakableService {
     @Autowired
     Exercises_ParkourRepository exercises_parkourRepository;
 
+    @Autowired
+    DisciplinesRepository disciplinesRepository;
+
+    @Autowired
+    ElementsRepository elementsRepository;
+
 
 
     public List getExercices(String discipline, List<String> group, List<Integer> level){

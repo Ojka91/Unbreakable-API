@@ -20,7 +20,7 @@ public class UnbreakableController {
 
     @Autowired
     Exercises_ParkourRepository exercises_parkourRepository;
-    
+
     @Autowired
     private UnbreakableService unbreakableService;
 
