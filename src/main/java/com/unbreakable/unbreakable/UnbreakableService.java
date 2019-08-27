@@ -64,6 +64,27 @@ public class UnbreakableService {
             }
         }
 
+        return exercices_calisthenicsRepository.findAll();
+    }
+
+    public List getDiscipline(String discipline){
+        if(discipline.equals("calisthenics")) {
+            return exercices_calisthenicsRepository.findAll();
+        }
+        if(discipline.equals("athletics")) {
+            return exercises_athleticsRepository.findAll();
+        }
+        if(discipline.equals("parkour")){
+            return exercises_parkourRepository.findAll();
+        }
         return null;
+    }
+
+    public List getDisciplines(){
+        return disciplinesRepository.findAll();
+    }
+
+    public List getElements(){
+        return elementsRepository.findAll();
     }
 }
