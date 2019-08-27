@@ -16,7 +16,10 @@ public class UnbreakableController {
     @Autowired
     private UnbreakableService unbreakableService;
 
-
+    @RequestMapping("")
+    public String apiOk(){
+        return "Ok";
+    }
 
     @RequestMapping("/{discipline}")
     public List getDiscipline(@PathVariable String discipline) {
