@@ -1,0 +1,67 @@
+html,
+body {
+    height: 100vh;
+    min-height: 100vh;
+}
+
+body {
+    background: rgb(41, 41, 47);
+    background: linear-gradient(37deg, rgba(41, 41, 47, 1) 0%, rgba(86, 86, 103, 1) 35%, rgba(143, 152, 167, 1) 100%);
+}
+
+.title {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+    font-family: 'Gayathri', sans-serif;
+    font-size: 40px;
+    color: rgba(224, 224, 224, 0.897);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.836), 0 0 10px rgba(255, 255, 255, 0.836);
+}
+
+.titleBackground{
+    background-color: rgba(49, 201, 130, 0);
+}
+
+.disciplinesBox {
+    margin: -10px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 2px solid #bfedc1;
+    border-right: 5px solid #bfedc1;
+    border-bottom: 2px solid #bfedc1;
+    border-left: 5px solid #bfedc1;
+
+
+
+    border-width: 2px;
+    border-style: solid;
+    border-color: white;
+    height: 65px;
+}
+
+.background {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: wrap;
+    height: 75vh;
+    padding: 0px;
+    margin: 0px;
+}
+
+.section {
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.disciplines {
+    font-family: 'Gayathri', sans-serif;
+    font-size: 16px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
