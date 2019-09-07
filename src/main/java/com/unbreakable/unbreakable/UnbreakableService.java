@@ -45,7 +45,10 @@ public class UnbreakableService {
         if(usersRepository.findByUsername(user.getUsername())!=null){
             return new ResponseEntity<>(makeMap("error", "User Already Exist"), HttpStatus.FORBIDDEN);
         }
-            usersRepository.save(new Users(user.getUsername()));
+        if(user.getPassword().equals("") || user.getUsername().equals("")){
+            return new ResponseEntity<>(makeMap("error","Username and Password are required"), HttpStatus.FORBIDDEN);
+        }
+            usersRepository.save(new Users(user.getUsername(), user.getPassword()));
             return new ResponseEntity<>(makeMap("created user", user.getUsername()), HttpStatus.CREATED);
     }
 

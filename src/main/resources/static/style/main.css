@@ -167,6 +167,10 @@ body::after{
 
 }
 
+.error{
+    color: red;
+}
+
 .discipline{
     width: 40%;
     font-family: 'Gayathri', sans-serif;

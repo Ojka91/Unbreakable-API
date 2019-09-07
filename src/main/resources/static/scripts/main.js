@@ -6,8 +6,10 @@ var app = new Vue({
     lastView:"menu",
     userData:{
       username: "",
+      password:"",
     },
     users:[],
+    errorCreatingUser: false,
 
 
   },
@@ -90,27 +92,33 @@ var app = new Vue({
      },
 
      createUser(){
-       this.view="loading";
-        this.userData.username = document.getElementById("userName").value;
-
-        fetch('/api/users', {
-          credentials: 'include',
-          method: 'POST',
-          headers: {
-              'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(app.userData)
-      }).then(function (response) {
-          return response.json();
-      }).then(function (json) {
-          console.log('parsed json', json)
-          app.getUsers();
-      }).catch(function (ex) {
-          console.log('parsing failed', ex)
-          alert("error creating new user"+ ex);
-
-      });
-      this.view="profile";
+       uname = document.getElementById("userName")
+       pwd = document.getElementById("password")
+       if(uname.value != null && pwd.value != null){
+         this.view="loading"
+         this.userData.username = uname.value
+         this.userData.password = pwd.value
+         fetch('/api/users', {
+           credentials: 'include',
+           method: 'POST',
+           headers: {
+             'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(app.userData)
+          }).then(function (response) {
+            return response.json();
+          }).then(function (json) {
+            console.log('parsed json', json)
+            app.getUsers();
+          }).catch(function (ex) {
+            console.log('parsing failed', ex)
+            alert("error creating new user"+ ex);
+            
+          });
+          this.view="profile";
+        }else{
+          this.errorCreatingUser = true;
+        }
      }
 
 

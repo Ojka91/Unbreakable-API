@@ -54,8 +54,11 @@
 
         <div class="profileBackground" v-if="view==='profile'">
             <h1 class="profileTitle">Profile</h1>
+                <span class="error" v-if="errorCreatingUser">Username and Password are required</span>
             <form onsubmit="return false">
-               <label>Name<input type="username" placeholder="Name" id="userName" required></label> 
+               <label>Name <input type="username" placeholder="Name" id="userName" required></label> 
+               <label>Password <input type="password" placeholder="Password" id="password" required></label> 
+
                 <button @click="createUser">Create</button>
             </form>
 
