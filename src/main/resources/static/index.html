@@ -14,54 +14,84 @@
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
         <link href="https://fonts.googleapis.com/css?family=Gayathri&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="style/main.css">
+        <link rel="stylesheet" href="style/loader.css">
+
     </head>
 </head>
 
 <body>
-    <div id="app">
+    <div id="app" class="app">
         <!-- ///////////// Main //////////// -->
-        <div v-if="view === 'main'">
-            <div class="row titleBackground">
-                <div class="col-12">
-                    <div class="title">
-                        <span>Unbreakable</span>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="background">     
-                <div class="row section">
-                    <div class="col-6 disciplinesBox">
-                        <div class="disciplines" @click="changeView('discipline')">Disciplines</div>
-                    </div>
-                    <div class="col-6 disciplinesBox">
-                        <div class="disciplines">Elements</div>
-                    </div>
-                </div>
-                <div class="row section">
-                    <div class="col-6 disciplinesBox">
-                        <span class="disciplines">Routines</span>
-                    </div>
-                    <div class="col-6 disciplinesBox">
-                        <span class="disciplines">Timer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-                <!-- ///////////// Disciplines //////////// -->
-        <div v-if="view == 'discipline'">
-            Discipline
+        <div class="main" v-if="view==='main'">
+            <div class="titleMain"><span>Unbreakable</span><span>App</span></div>
+            <div class="enterMain" @click="changeView('menu')"><span>Enter</span></div>
         </div>
 
 
+        <!-- ///////////// Menu //////////// -->
+
+        <div class="baseMenu" v-if="view === 'menu'">
+            <div class="background">
+                <div class="section borderR borderD"><span>Routines</span></div>
+                <div class="section borderL borderD" @click="changeView('disciplines'), getLastView('menu')">
+                    <span>Disciplines</span></div>
+                <div class="section borderR borderU"><span>Elements</span></div>
+                <div class="section borderL borderU"><span>About</span></div>
+            </div>
+        </div>
+
+        <!-- ///////////// Disciplines //////////// -->
+        <div class="disciplineTitleBox" v-if="view === 'disciplines'">
+            <h1 class="disciplineTitle">Discipline</h1>
+            <div class="disciplinesBox">
+
+                <div v-for="discipline in disciplines" class="discipline"><span>{{discipline.name}}</span></div>
+            </div>
+        </div>
+
+
+        <!-- ///////////// Profile //////////// -->
+
+        <div class="profileBackground" v-if="view==='profile'">
+            <h1 class="profileTitle">Profile</h1>
+            <form onsubmit="return false">
+               <label>Name<input type="username" placeholder="Name" id="userName" required></label> 
+                <button @click="createUser">Create</button>
+            </form>
+
+            <div>
+                <span>List of Users</span>
+                <div v-for="user in users">{{user.username}}</div>
+            </div>
+        </div>
+
+
+        <!-- ///////////// NavBar //////////// -->
+
+        <div class="navBar" v-if="view!='main'&& view!='loading'">
+            <img v-if="view != 'menu'" src="style/assets/back.png" class="iconBar" alt="back" @click="back()">
+            <div class="iconBar" v-if="view==='menu'"></div>
+            <img src="style/assets/profile.png" class="iconBar" alt="profile" @click="changeView('profile')">
+            <img src="style/assets/time.png" class="iconBar" alt="time">
+        </div>
+
+
+
+        <!-- ///////////// Loading //////////// -->
+
+        <div class="background fixed-bottom loading" v-if="view === 'loading'">
+            <div class="lds-ripple">
+                <div></div>
+                <div></div>
+            </div>
+        </div>
 
     </div>
-        
-        
-        
-        <!-- vuejs development version, includes helpful console warnings -->
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <!-- vuejs development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!--bootstrap-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">

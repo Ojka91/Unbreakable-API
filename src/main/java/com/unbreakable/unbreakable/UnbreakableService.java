@@ -1,10 +1,15 @@
 package com.unbreakable.unbreakable;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,7 +30,28 @@ public class UnbreakableService {
     @Autowired
     ElementsRepository elementsRepository;
 
+    @Autowired
+    UsersRepository usersRepository;
 
+    private Map<String, Object> makeMap(String key, Object value) {
+        Map<String, Object> map = new HashMap<>();
+        map.put(key, value);
+        return map;
+    }
+
+
+
+    public ResponseEntity<Object> createUser(Users user){
+        if(usersRepository.findByUsername(user.getUsername())!=null){
+            return new ResponseEntity<>(makeMap("error", "User Already Exist"), HttpStatus.FORBIDDEN);
+        }
+            usersRepository.save(new Users(user.getUsername()));
+            return new ResponseEntity<>(makeMap("created user", user.getUsername()), HttpStatus.CREATED);
+    }
+
+    public List getUsers(){
+        return usersRepository.findAll();
+    }
 
     public List getExercices(String discipline, List<String> group, List<Integer> level){
         if(discipline.equals("calisthenics")){

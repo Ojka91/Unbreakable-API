@@ -2,11 +2,57 @@ html,
 body {
     height: 100vh;
     min-height: 100vh;
+    
 }
 
 body {
-    background: rgb(41, 41, 47);
     background: linear-gradient(37deg, rgba(41, 41, 47, 1) 0%, rgba(86, 86, 103, 1) 35%, rgba(143, 152, 167, 1) 100%);
+
+
+}
+body::after{
+    background: url(assets/BASIC_NOSHADE.png) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    opacity: 0;
+    z-index: -1;
+
+}
+
+.app{
+    height: 100vh;
+}
+.main{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.enterMain{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+    height: 50px;
+    color: white;
+    padding-top: 5px;
+    margin-bottom: 269px;
+    font-family: 'Gayathri', sans-serif;
+    font-size: 20px;
+    border: solid rgb(255, 255, 255) 2px;
+
+}
+.baseMenu{
+    height: 88vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 
 .title {
@@ -19,43 +65,58 @@ body {
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.836), 0 0 10px rgba(255, 255, 255, 0.836);
 }
 
-.titleBackground{
-    background-color: rgba(49, 201, 130, 0);
-}
-
-.disciplinesBox {
-    margin: -10px;
-    padding: 0;
+.titleMain{
     display: flex;
     justify-content: center;
     align-items: center;
-    border-top: 2px solid #bfedc1;
-    border-right: 5px solid #bfedc1;
-    border-bottom: 2px solid #bfedc1;
-    border-left: 5px solid #bfedc1;
-
-
-
-    border-width: 2px;
-    border-style: solid;
-    border-color: white;
-    height: 65px;
+    flex-direction: column;
+    font-family: 'Gayathri', sans-serif;
+    font-size: 40px;
+    color: rgba(224, 224, 224, 0.897);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.836), 0 0 10px rgba(255, 255, 255, 0.836);
+    padding-top: 86px;
 }
+
+.titleBackground{
+    height: 95px;
+}
+
+
+
 
 .background {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
-    flex-flow: wrap;
-    height: 75vh;
+    flex-wrap: wrap;
     padding: 0px;
     margin: 0px;
+    width: 100%;
+    box-shadow: 0px 0px 50px white;
 }
 
 .section {
-    width: 80%;
+    width: 50%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Gayathri', sans-serif;
+    font-size: 22px;
+    color: rgb(255, 255, 255);
+    height: 150px;
+ 
+}
+.borderU{
+    border-top: solid rgb(209, 209, 209) 2px;
+}
+.borderL{
+    border-left: solid rgb(209, 209, 209) 2px;
+}
+.borderR{
+    border-right: solid rgb(209, 209, 209) 2px;
+}
+.borderD{
+    border-bottom: solid rgb(209, 209, 209) 2px;
 }
 
 .disciplines {
@@ -64,4 +125,54 @@ body {
     color: white;
     display: flex;
     align-items: center;
+}
+
+.disciplineTitleBox{
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.navBar{
+    display: flex;
+    justify-content: center;
+    justify-content: space-around;
+    align-items: center;
+
+    height:12vh;
+}
+
+.iconBar{
+    height: 40px;
+}
+
+.disciplineTitle, profileTitle{
+    font-size: 26px;
+    font-family: 'Gayathri', sans-serif;
+    color: rgb(255, 255, 255);
+
+}
+
+.loading{
+    height: 100vh;
+}
+
+.disciplinesBox{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+
+}
+
+.discipline{
+    width: 40%;
+    font-family: 'Gayathri', sans-serif;
+
+}
+
+.profileBackground{
+    height: 88vh;
 }
