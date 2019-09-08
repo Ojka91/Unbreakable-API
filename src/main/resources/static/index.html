@@ -33,7 +33,7 @@
         <div class="baseMenu" v-if="view === 'menu'">
             <div class="background">
                 <div class="section borderR borderD"><span>Routines</span></div>
-                <div class="section borderL borderD" @click="changeView('disciplines'), getLastView('menu')">
+                <div class="section borderL borderD" @click="changeView('disciplines')">
                     <span>Disciplines</span></div>
                 <div class="section borderR borderU"><span>Elements</span></div>
                 <div class="section borderL borderU"><span>About</span></div>
@@ -54,12 +54,15 @@
 
         <div class="profileBackground" v-if="view==='profile'">
             <h1 class="profileTitle">Profile</h1>
-                <span class="error" v-if="errorCreatingUser">Username and Password are required</span>
-            <form onsubmit="return false">
-               <label>Name <input type="username" placeholder="Name" id="userName" required></label> 
-               <label>Password <input type="password" placeholder="Password" id="password" required></label> 
+                <span v-if="creatingUserInfoOk!=null" class="infoCreatingUserOk">{{creatingUserInfoOk}}</span>
+                <span v-if="creatingUserInfoKo!=null" class="infoCreatingUserKo">{{creatingUserInfoKo}}</span>
 
-                <button @click="createUser">Create</button>
+            <form onsubmit="return false">
+                <div class="form">                    
+                    <label>Name <input type="username" placeholder="Name" id="userName" required></label> 
+                    <label>Password <input type="password" placeholder="Password" id="password" required></label>    
+                    <button @click="createUser">Create</button>
+                </div>
             </form>
 
             <div>
@@ -72,7 +75,7 @@
         <!-- ///////////// NavBar //////////// -->
 
         <div class="navBar" v-if="view!='main'&& view!='loading'">
-            <img v-if="view != 'menu'" src="style/assets/back.png" class="iconBar" alt="back" @click="back()">
+            <img v-show="view != 'menu'" src="style/assets/back.png" class="iconBar" alt="back" @click="back()">
             <div class="iconBar" v-if="view==='menu'"></div>
             <img src="style/assets/profile.png" class="iconBar" alt="profile" @click="changeView('profile')">
             <img src="style/assets/time.png" class="iconBar" alt="time">

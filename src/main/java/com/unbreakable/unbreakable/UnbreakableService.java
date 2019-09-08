@@ -49,7 +49,7 @@ public class UnbreakableService {
             return new ResponseEntity<>(makeMap("error","Username and Password are required"), HttpStatus.FORBIDDEN);
         }
             usersRepository.save(new Users(user.getUsername(), user.getPassword()));
-            return new ResponseEntity<>(makeMap("created user", user.getUsername()), HttpStatus.CREATED);
+            return new ResponseEntity<>(makeMap("correct", "created user: "+ user.getUsername()), HttpStatus.CREATED);
     }
 
     public List getUsers(){

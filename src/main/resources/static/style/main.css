@@ -167,8 +167,18 @@ body::after{
 
 }
 
-.error{
+.infoCreatingUserOk{
+    color: rgb(22, 221, 32);
+}
+.infoCreatingUserKo{
     color: red;
+}
+
+.form{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .discipline{
