@@ -65,16 +65,16 @@
                 </div>
             </form>
 
-            <div>
-                <span>List of Users</span>
-                <div v-for="user in users">{{user.username}}</div>
+            <div  class="listOfUsers">
+                <span class="subTitle">List of Users</span>
+                <div v-for="user in users" class="user">{{user.username}}</div>
             </div>
         </div>
 
 
         <!-- ///////////// NavBar //////////// -->
 
-        <div class="navBar" v-if="view!='main'&& view!='loading'">
+        <div class="navBar fixed-bottom" v-if="view!='main'&& view!='loading'">
             <img v-show="view != 'menu'" src="style/assets/back.png" class="iconBar" alt="back" @click="back()">
             <div class="iconBar" v-if="view==='menu'"></div>
             <img src="style/assets/profile.png" class="iconBar" alt="profile" @click="changeView('profile')">

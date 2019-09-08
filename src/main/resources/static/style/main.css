@@ -7,7 +7,7 @@ body {
 
 body {
     background: linear-gradient(37deg, rgba(41, 41, 47, 1) 0%, rgba(86, 86, 103, 1) 35%, rgba(143, 152, 167, 1) 100%);
-
+    background-attachment:fixed;
 
 }
 body::after{
@@ -140,7 +140,7 @@ body::after{
     justify-content: center;
     justify-content: space-around;
     align-items: center;
-
+    background-color: #a2a2a27a;
     height:12vh;
 }
 
@@ -148,10 +148,13 @@ body::after{
     height: 40px;
 }
 
-.disciplineTitle, profileTitle{
-    font-size: 26px;
+.disciplineTitle, .profileTitle{
+    font-size: 40px;
     font-family: 'Gayathri', sans-serif;
     color: rgb(255, 255, 255);
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
 
 }
 
@@ -189,4 +192,21 @@ body::after{
 
 .profileBackground{
     height: 88vh;
+}
+
+.listOfUsers{
+    margin-bottom: 12vh;
+}
+.subTitle{
+    font-size: 28px;
+    color: #6f1313;
+    width: 100%;
+    border-bottom: solid black 2px;
+    padding-bottom: 5px;
+}
+
+.user{
+margin-bottom: 5px;
+border: #5d7d62 solid 1px;
+background-color: #99e4b969;
 }
