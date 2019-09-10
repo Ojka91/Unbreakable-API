@@ -7,9 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.persistence.criteria.CriteriaBuilder;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -52,8 +50,24 @@ public class UnbreakableService {
             return new ResponseEntity<>(makeMap("correct", "created user: "+ user.getUsername()), HttpStatus.CREATED);
     }
 
-    public List getUsers(){
-        return usersRepository.findAll();
+    private Map<String, Object> playersDTO(Users user) {
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("name", user.getUsername());
+        dto.put("PushUps", user.getPushup());
+        dto.put("PullUps", user.getPullup());
+        dto.put("Handstand Hold", user.getHandstandhold());
+        dto.put("Handstand PushUp", user.getHandstandpullup());
+        dto.put("FrontLever", user.getFrontlever());
+        dto.put("BackLever", user.getBacklever());
+        return dto;
+    }
+
+    public List getUserInfo(){
+        List<Map> info = new ArrayList<>();
+        for (Users user:usersRepository.findAll()) {
+            info.add(playersDTO(user));
+        }
+        return info;
     }
 
     public List getExercices(String discipline, List<String> group, List<Integer> level){

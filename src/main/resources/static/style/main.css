@@ -196,17 +196,20 @@ body::after{
 
 .listOfUsers{
     margin-bottom: 12vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .subTitle{
     font-size: 28px;
     color: #6f1313;
     width: 100%;
     border-bottom: solid black 2px;
-    padding-bottom: 5px;
 }
 
 .user{
 margin-bottom: 5px;
 border: #5d7d62 solid 1px;
 background-color: #99e4b969;
+width: 90%;
 }

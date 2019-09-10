@@ -9,6 +9,12 @@ public class Users {
     private int id;
     private String username;
     private String password;
+    private Integer pushup;
+    private Integer pullup;
+    private Integer handstandhold;
+    private Integer handstandpullup;
+    private Integer frontlever;
+    private Integer backlever;
 
 
     public Users(){
@@ -41,5 +47,53 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Integer getPushup() {
+        return pushup;
+    }
+
+    public void setPushup(Integer pushUp) {
+        pushup = pushup;
+    }
+
+    public Integer getPullup() {
+        return pullup;
+    }
+
+    public void setPullup(Integer pullup) {
+        this.pullup = pullup;
+    }
+
+    public Integer getHandstandhold() {
+        return handstandhold;
+    }
+
+    public void setHandstandhold(Integer handstandhold) {
+        this.handstandhold = handstandhold;
+    }
+
+    public Integer getHandstandpullup() {
+        return handstandpullup;
+    }
+
+    public void setHandstandpullup(Integer handstandpullup) {
+        this.handstandpullup = handstandpullup;
+    }
+
+    public Integer getFrontlever() {
+        return frontlever;
+    }
+
+    public void setFrontlever(Integer frontlever) {
+        this.frontlever = frontlever;
+    }
+
+    public Integer getBacklever() {
+        return backlever;
+    }
+
+    public void setBacklever(Integer backlever) {
+        this.backlever = backlever;
     }
 }

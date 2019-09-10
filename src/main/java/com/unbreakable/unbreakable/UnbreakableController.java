@@ -51,6 +51,6 @@ public class UnbreakableController {
 
     @RequestMapping("/users")
     public List getUsers(){
-       return unbreakableService.getUsers();
+       return unbreakableService.getUserInfo();
     }
 }
