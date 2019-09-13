@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -55,8 +53,8 @@ public class UnbreakableService {
         dto.put("name", user.getUsername());
         dto.put("PushUps", user.getPushup());
         dto.put("PullUps", user.getPullup());
-        dto.put("Handstand Hold", user.getHandstandhold());
-        dto.put("Handstand PushUp", user.getHandstandpullup());
+        dto.put("HandstandHold", user.getHandstandhold());
+        dto.put("HandstandPushUp", user.getHandstandpushup());
         dto.put("FrontLever", user.getFrontlever());
         dto.put("BackLever", user.getBacklever());
         return dto;

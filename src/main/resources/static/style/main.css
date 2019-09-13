@@ -213,3 +213,19 @@ border: #5d7d62 solid 1px;
 background-color: #99e4b969;
 width: 90%;
 }
+
+.skillBox{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.skills{
+    width: 50%;
+}
+
+.userName{
+    color: #efefef;
+    font-size: 24px;
+}

@@ -12,7 +12,7 @@ public class Users {
     private Integer pushup;
     private Integer pullup;
     private Integer handstandhold;
-    private Integer handstandpullup;
+    private Integer handstandpushup;
     private Integer frontlever;
     private Integer backlever;
 
@@ -73,12 +73,12 @@ public class Users {
         this.handstandhold = handstandhold;
     }
 
-    public Integer getHandstandpullup() {
-        return handstandpullup;
+    public Integer getHandstandpushup() {
+        return handstandpushup;
     }
 
-    public void setHandstandpullup(Integer handstandpullup) {
-        this.handstandpullup = handstandpullup;
+    public void setHandstandpushup(Integer handstandpushup) {
+        this.handstandpushup = handstandpushup;
     }
 
     public Integer getFrontlever() {

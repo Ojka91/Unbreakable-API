@@ -54,21 +54,30 @@
 
         <div class="profileBackground" v-if="view==='profile'">
             <h1 class="profileTitle">Profile</h1>
-                <span v-if="creatingUserInfoOk!=null" class="infoCreatingUserOk">{{creatingUserInfoOk}}</span>
-                <span v-if="creatingUserInfoKo!=null" class="infoCreatingUserKo">{{creatingUserInfoKo}}</span>
+            <span v-if="creatingUserInfoOk!=null" class="infoCreatingUserOk">{{creatingUserInfoOk}}</span>
+            <span v-if="creatingUserInfoKo!=null" class="infoCreatingUserKo">{{creatingUserInfoKo}}</span>
 
             <form onsubmit="return false">
-                <div class="form">                    
-                    <label>Name <input type="username" placeholder="Name" id="userName" required></label> 
-                    <label>Password <input type="password" placeholder="Password" id="password" required></label>    
+                <div class="form">
+                    <label>Name <input type="username" placeholder="Name" id="userName" required></label>
+                    <label>Password <input type="password" placeholder="Password" id="password" required></label>
                     <button @click="createUser">Create</button>
                 </div>
             </form>
 
-            <div  class="listOfUsers">
+            <div class="listOfUsers">
                 <span class="subTitle">List of Users</span>
-                <div v-for="user in users" class="user">{{user.name}}</div>
-                <div v-for="user in users" class="user">{{user.PushUps}}</div>
+                <div v-for="user in users" class="user">
+                    <div class="userName">{{user.name}}</div>
+                    <div class="skillBox">
+                        <div class="skills">PushUps: {{user.PushUps}} </div>
+                        <div class="skills">PullUps: {{user.PullUps}}</div>
+                        <div class="skills">Handstand Hold: {{user.HandstandHold}}</div>
+                        <div class="skills">Handstand PushUps: {{user.HandstandPushUp}}</div>
+                        <div class="skills">Frontlever: {{user.FrontLever}}</div>
+                        <div class="skills">Backlever: {{user.BackLever}}</div>
+                    </div>
+                </div>
 
             </div>
         </div>
