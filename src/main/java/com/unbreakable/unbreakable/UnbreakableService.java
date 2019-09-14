@@ -60,12 +60,30 @@ public class UnbreakableService {
         return dto;
     }
 
-    public List getUserInfo(){
+    public List getUsers(){
         List<Map> info = new ArrayList<>();
         for (Users user:usersRepository.findAll()) {
             info.add(playersDTO(user));
         }
         return info;
+    }
+
+    public Map<String, Object> getUserInfo(String userName){
+        return playersDTO(usersRepository.findByUsername(userName));
+    }
+
+    public ResponseEntity<Object> updateUserInfo(String userName, Integer pushUp, Integer pullUp, Integer hsHold,
+                                                 Integer hsPushUp, Integer frontLever, Integer backLever){
+        Users usuario = usersRepository.findByUsername(userName);
+        usuario.setPullup(pullUp);
+        usuario.setBacklever(backLever);
+        usuario.setPushup(pushUp);
+        usuario.setFrontlever(frontLever);
+        usuario.setHandstandhold(hsHold);
+        usuario.setHandstandpushup(hsPushUp);
+       usersRepository.save(usuario);
+        return new ResponseEntity<>(makeMap("correct", "Info Updated"), HttpStatus.CREATED);
+
     }
 
     public List getExercices(String discipline, List<String> group, List<Integer> level){

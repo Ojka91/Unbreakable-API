@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -51,6 +52,18 @@ public class UnbreakableController {
 
     @RequestMapping("/users")
     public List getUsers(){
-       return unbreakableService.getUserInfo();
+       return unbreakableService.getUsers();
     }
+    @RequestMapping("/users/{userName}")
+    public Map<String, Object> getUser(@PathVariable String userName){
+        return unbreakableService.getUserInfo(userName);
+    }
+
+    @RequestMapping(path = "/users/{userName}", method = RequestMethod.POST)
+    public ResponseEntity<Object> updateProfile(@PathVariable String userName,@RequestParam Integer pushUp, @RequestParam
+            Integer pullUp, @RequestParam Integer hsHold, @RequestParam Integer hsPushUp, @RequestParam Integer frontLever,
+                                                @RequestParam Integer backLever){
+        return unbreakableService.updateUserInfo(userName, pushUp, pullUp, hsHold, hsPushUp, frontLever, backLever);
+    }
+
 }

@@ -66,7 +66,7 @@
             </form>
 
             <div class="listOfUsers">
-                <span class="subTitle">List of Users</span>
+                <span class="subTitle">Users</span>
                 <div v-for="user in users" class="user">
                     <div class="userName">{{user.name}}</div>
                     <div class="skillBox">
@@ -77,10 +77,50 @@
                         <div class="skills">Frontlever: {{user.FrontLever}}</div>
                         <div class="skills">Backlever: {{user.BackLever}}</div>
                     </div>
-                    <button class="btn-danger">Edit</button>
+                    <button class="btn-danger" @click="personalProfileIn(user.name)">Edit</button>
                 </div>
 
             </div>
+        </div>
+
+        <!-- /////////////Personal Profile //////////// -->
+        <div v-if="view == 'personalProfile'" class="profilePersonalBackground">
+            <h1 class="profileTitle">{{users.name}}</h1>
+            <form onsubmit="return false" class="formProfile">
+
+                <div class="row myRow">
+                    <div class="col-6">Current Push ups: {{users.PushUps}}</div>
+                    <div class="col-6">New Record: <input type="number" placeholder="Push ups" id="pshup"></div>
+                </div>
+                <div class="row myRow">
+                    <div class="col-6">Current Pull ups: {{users.PullUps}}</div>
+                    <div class="col-6">New Record: <input type="number" placeholder="Pull ups" id="pllup"></div>
+                </div>
+                <div class="row myRow">
+                    <div class="col-6">Current HS Hold: {{users.HandstandHold}}</div>
+                    <div class="col-6">New Record: <input type="number" placeholder="Handstand Hold" id="hh"></div>
+                </div>
+                <div class="row myRow">
+                    <div class="col-6">Current HS Push up: {{users.HandstandPushUp}}</div>
+                    <div class="col-6">New Record: <input type="number" placeholder="Handstand Push ups" id="hp"></div>
+                </div>
+                <div class="row myRow">
+                    <div class="col-6">Current Frontlever: {{users.FrontLever}}</div>
+                    <div class="col-6">New Record: <input type="number" placeholder="Frontlever" id="fl"></div>
+                </div>
+                <div class="row myRow">
+                    <div class="col-6">Current Backlever: {{users.BackLever}}</div>
+                    <div class="col-6">New Record: <input type="number" placeholder="Backlever" id="bl"></div>
+                </div>
+
+                <div class="flexCenter">
+                    <div class="col-6 myRow">Password <input type="password" placeholder="password"></div>
+                    <div class="col-6 myRow"><button class="btn-danger" @click="updateProfile()">Update</button></div>
+                </div>
+                    
+                
+
+            </form>
         </div>
 
 

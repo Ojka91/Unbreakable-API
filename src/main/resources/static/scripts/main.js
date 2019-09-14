@@ -11,6 +11,7 @@ var app = new Vue({
     users:[],
     creatingUserInfoOk: null,
     creatingUserInfoKo: null,
+    updateUserInfoOK:null,
 
 
   },
@@ -71,8 +72,13 @@ var app = new Vue({
 
 
      back(){
-       this.view = 'menu';
-     },
+       if(this.view == 'personalProfile'){
+         app.changeView("profile");
+       }else{
+         this.view = 'menu';
+        }
+      },
+
 
      getUsers(){
       fetch('http://localhost:8080/api/users', {
@@ -140,7 +146,58 @@ var app = new Vue({
           app.creatingUserInfoKo=null;
 
         }, 5000);
-     }
+     },
+
+     updateProfile(){
+        pshup = document.getElementById("pshup").value;
+        pllup = document.getElementById("pllup").value;
+        hh = document.getElementById("hh").value;
+        hp = document.getElementById("hp").value;
+        fl = document.getElementById("fl").value;
+        bl = document.getElementById("bl").value;
+
+        fetch('/api/users/'+app.users.name+'?pushUp='+pshup+'&pullUp='+pllup+'&hsHold='+hh+'&hsPushUp='+hp+
+        '&frontLever='+fl+'&backLever='+bl, {
+          credentials: 'include',
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+           },
+           body: 'pushUp='+pshup+'pullUp='+pllup+'hsHold='+hh+'hsPushUp='+hp+'frontLever='+fl+'backLever='+bl,
+         }).then(function (response) {
+           return response.json();
+         }).then(function (json) {
+         
+           if(Object.keys(json).includes("correct")){
+             app.updateUserInfoOK = json.correct;
+           }
+          }).catch(function (ex) {
+            console.log('parsing failed', ex)
+            
+          });
+         
+
+      },
+
+     personalProfileIn(userName){
+      this.view="loading"
+
+      
+        fetch('http://localhost:8080/api/users/'+userName, {
+          mode: 'no-cors'
+        })
+        .then((res) => res.json())
+        .then((json) => {
+          this.users = json;
+          this.view = "personalProfile"
+
+        })
+        .catch((err) => {
+          console.log(err);
+  
+        })
+       },
+    
 
 
   }
