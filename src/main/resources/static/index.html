@@ -54,6 +54,7 @@
 
         <div class="profileBackground" v-if="view==='profile'">
             <h1 class="profileTitle">Profile</h1>
+            <div v-if="updateUserInfoOK != null" class="infoCreatingUserOk">{{updateUserInfoOK}}</div>
             <span v-if="creatingUserInfoOk!=null" class="infoCreatingUserOk">{{creatingUserInfoOk}}</span>
             <span v-if="creatingUserInfoKo!=null" class="infoCreatingUserKo">{{creatingUserInfoKo}}</span>
 
@@ -85,7 +86,8 @@
 
         <!-- /////////////Personal Profile //////////// -->
         <div v-if="view == 'personalProfile'" class="profilePersonalBackground">
-            <h1 class="profileTitle">{{users.name}}</h1>
+                <h1 class="profileTitle">{{users.name}}</h1>
+            <div v-if="updateUserInfoKo != null" class="infoCreatingUserKo">{{updateUserInfoKo}}</div>
             <form onsubmit="return false" class="formProfile">
 
                 <div class="row myRow">
@@ -114,7 +116,7 @@
                 </div>
 
                 <div class="flexCenter">
-                    <div class="col-6 myRow">Password <input type="password" placeholder="password"></div>
+                    <div class="col-6 myRow">Password <input type="password" placeholder="Password" id="password"></div>
                     <div class="col-6 myRow"><button class="btn-danger" @click="updateProfile()">Update</button></div>
                 </div>
                     

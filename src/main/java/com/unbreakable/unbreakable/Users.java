@@ -53,8 +53,8 @@ public class Users {
         return pushup;
     }
 
-    public void setPushup(Integer pushUp) {
-        pushup = pushup;
+    public void setPushup(Integer pushup) {
+        this.pushup = pushup;
     }
 
     public Integer getPullup() {

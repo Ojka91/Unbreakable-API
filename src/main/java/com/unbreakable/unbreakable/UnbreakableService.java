@@ -73,16 +73,23 @@ public class UnbreakableService {
     }
 
     public ResponseEntity<Object> updateUserInfo(String userName, Integer pushUp, Integer pullUp, Integer hsHold,
-                                                 Integer hsPushUp, Integer frontLever, Integer backLever){
+                                                 Integer hsPushUp, Integer frontLever, Integer backLever, String password){
+
         Users user = usersRepository.findByUsername(userName);
-        user.setPullup(pullUp);
-        user.setBacklever(backLever);
-        user.setPushup(pushUp);
-        user.setFrontlever(frontLever);
-        user.setHandstandhold(hsHold);
-        user.setHandstandpushup(hsPushUp);
-       usersRepository.save(user);
-        return new ResponseEntity<>(makeMap("correct", "Info Updated"), HttpStatus.CREATED);
+        if(user.getPassword().equals(password)){
+           if(pullUp!=null) user.setPullup(pullUp);
+           if(backLever!=null) user.setBacklever(backLever);
+           if(pushUp != null) user.setPushup(pushUp);
+           if(frontLever != null) user.setFrontlever(frontLever);
+           if(hsHold != null) user.setHandstandhold(hsHold);
+           if(hsPushUp != null) user.setHandstandpushup(hsPushUp);
+            usersRepository.save(user);
+            return new ResponseEntity<>(makeMap("correct", "Profile Updated"), HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(makeMap("ko", "Wrong Password"), HttpStatus.FORBIDDEN);
+
+        }
+
 
     }
 

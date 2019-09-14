@@ -12,6 +12,7 @@ var app = new Vue({
     creatingUserInfoOk: null,
     creatingUserInfoKo: null,
     updateUserInfoOK:null,
+    updateUserInfoKo:null,
 
 
   },
@@ -144,7 +145,8 @@ var app = new Vue({
         function() {
           app.creatingUserInfoOk=null;
           app.creatingUserInfoKo=null;
-
+          app.updateUserInfoKo=null;
+          app.updateUserInfoOK=null;
         }, 5000);
      },
 
@@ -155,9 +157,10 @@ var app = new Vue({
         hp = document.getElementById("hp").value;
         fl = document.getElementById("fl").value;
         bl = document.getElementById("bl").value;
+        pwd = document.getElementById("password").value;
 
         fetch('/api/users/'+app.users.name+'?pushUp='+pshup+'&pullUp='+pllup+'&hsHold='+hh+'&hsPushUp='+hp+
-        '&frontLever='+fl+'&backLever='+bl, {
+        '&frontLever='+fl+'&backLever='+bl+'&password='+pwd, {
           credentials: 'include',
           method: 'POST',
           headers: {
@@ -166,10 +169,17 @@ var app = new Vue({
          }).then(function (response) {
            return response.json();
          }).then(function (json) {
-         
+          console.log('parsed json', json)
+          pshup.value = "";
+
            if(Object.keys(json).includes("correct")){
              app.updateUserInfoOK = json.correct;
+             app.changeView('profile');
+           }else{
+             app.updateUserInfoKo = json.ko;
+
            }
+           app.creatingUserMessageTimer();
           }).catch(function (ex) {
             console.log('parsing failed', ex)
             
