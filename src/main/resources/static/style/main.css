@@ -10,14 +10,19 @@ body {
     background-attachment:fixed;
 
 }
-body::after{
-    background: url(assets/BASIC_NOSHADE.png) no-repeat center center fixed; 
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    opacity: 0;
-    z-index: -1;
+body::before{
+    background: url(/style/assets/ironcross.jpg);
+    background-size:cover ;
+    content: "";
+    display:block;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    height: 100%;
+    width: 100%;
+    opacity: 0.5;
+    position: fixed;
+    background-position: center;   
 
 }
 
@@ -95,6 +100,14 @@ body::after{
     box-shadow: 0px 0px 50px white;
 }
 
+.borderWhite{
+    border: solid white 2px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 80%;
+}
 .section {
     width: 50%;
     display: flex;
@@ -140,12 +153,15 @@ body::after{
     justify-content: center;
     justify-content: space-around;
     align-items: center;
-    background-color: #a2a2a27a;
+    background-color: #c7c7c740;
     height:12vh;
+    box-shadow: 0px 0px 10px white;
+    border: white solid 1px;
 }
 
 .iconBar{
     height: 40px;
+    width: 40px;
 }
 
 .disciplineTitle, .profileTitle{
@@ -202,39 +218,25 @@ body::after{
 }
 .subTitle{
     font-size: 28px;
-    color: #6f1313;
+    color: white;
     width: 100%;
-    border-bottom: solid black 2px;
+    border-bottom: solid white 2px;
 }
 
 .user{
-margin-bottom: 5px;
-border: #3ae454 solid 1px;
-background-color: #5caf8f69;
 width: 90%;
 position: relative;
-margin-bottom: 12px;
+margin-bottom: 10px;
+margin-top: 10px;
 display: flex;
 flex-direction: column;
 align-items: center;
 padding-bottom: 5px;
+box-shadow:  0px 0px 10px white;
 
 }
 
-.user::before{
-    background: url(/style/assets/fullPlanche.jpg);
-    background-size: cover;
-    content: "";
-    display: block;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -2;
-    opacity: 1;
 
-}
 
 .skillBox{
     display: flex;
@@ -251,6 +253,6 @@ padding-bottom: 5px;
 }
 
 .userName{
-    color: #982020;
+    color: white;
     font-size: 24px;
 }
