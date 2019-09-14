@@ -163,7 +163,6 @@ var app = new Vue({
           headers: {
             'Content-Type': 'application/json'
            },
-           body: 'pushUp='+pshup+'pullUp='+pllup+'hsHold='+hh+'hsPushUp='+hp+'frontLever='+fl+'backLever='+bl,
          }).then(function (response) {
            return response.json();
          }).then(function (json) {

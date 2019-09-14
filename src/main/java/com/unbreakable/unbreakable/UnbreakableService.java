@@ -74,14 +74,14 @@ public class UnbreakableService {
 
     public ResponseEntity<Object> updateUserInfo(String userName, Integer pushUp, Integer pullUp, Integer hsHold,
                                                  Integer hsPushUp, Integer frontLever, Integer backLever){
-        Users usuario = usersRepository.findByUsername(userName);
-        usuario.setPullup(pullUp);
-        usuario.setBacklever(backLever);
-        usuario.setPushup(pushUp);
-        usuario.setFrontlever(frontLever);
-        usuario.setHandstandhold(hsHold);
-        usuario.setHandstandpushup(hsPushUp);
-       usersRepository.save(usuario);
+        Users user = usersRepository.findByUsername(userName);
+        user.setPullup(pullUp);
+        user.setBacklever(backLever);
+        user.setPushup(pushUp);
+        user.setFrontlever(frontLever);
+        user.setHandstandhold(hsHold);
+        user.setHandstandpushup(hsPushUp);
+       usersRepository.save(user);
         return new ResponseEntity<>(makeMap("correct", "Info Updated"), HttpStatus.CREATED);
 
     }
