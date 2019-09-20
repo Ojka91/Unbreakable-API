@@ -138,12 +138,12 @@ body::before{
     color: white;
     display: flex;
     align-items: center;
+    
 }
 
 .disciplineTitleBox{
     height: 88vh;
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
 }
@@ -183,6 +183,7 @@ body::before{
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
+    margin-top: 20px;
 
 }
 
@@ -203,9 +204,29 @@ body::before{
 .discipline{
     width: 40%;
     font-family: 'Gayathri', sans-serif;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid white 1px;
+    background-color: rgba(214, 214, 214, 0.514);
+    height: 85%;
 
 }
-
+.miniElement{
+    width: 40%;
+    font-family: 'Gayathri', sans-serif;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.elementTitle{
+    font-size: 20px;
+    border-bottom: solid 1px white;
+}
 .profileBackground{
     height: 88vh;
 }
@@ -233,7 +254,6 @@ flex-direction: column;
 align-items: center;
 padding-bottom: 5px;
 box-shadow:  0px 0px 10px white;
-
 }
 
 
@@ -250,6 +270,8 @@ box-shadow:  0px 0px 10px white;
 
 .skills{
     width: 50%;
+    font-size: 14px;
+
 }
 
 .userName{
@@ -275,9 +297,32 @@ background: rgba(255, 255, 255, 0.48);
     width: 90%;
 }
 
+.red {
+    color: red;
+    font-weight: bold;
+}
+
 .flexCenter{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.element{
+    width: 45%;
+    color: white;
+    border: solid 1px white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120%;
+    flex-direction: column;
+    background-color: #d6d6d687;
+
+}
+
+.infoCenter{
+    display: flex;
+    justify-content: center;
+    margin-top: 61px;
 }

@@ -13,6 +13,7 @@ var app = new Vue({
     creatingUserInfoKo: null,
     updateUserInfoOK:null,
     updateUserInfoKo:null,
+    elements:[],
 
 
   },
@@ -41,7 +42,7 @@ var app = new Vue({
           })
           .then((res) => res.json())
           .then((json) => {
-            this.disciplines = json;
+            this.elements = json;
             this.view = view;
           })
           .catch((err) => {

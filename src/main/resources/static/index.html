@@ -35,7 +35,8 @@
                 <div class="section borderR borderD"><span class="borderWhite">Routines</span></div>
                 <div class="section borderL borderD" @click="changeView('disciplines')">
                     <span class="borderWhite">Disciplines</span></div>
-                <div class="section borderR borderU"><span class="borderWhite">Elements</span></div>
+                <div class="section borderR borderU" @click="changeView('elements')">
+                    <span class="borderWhite">Elements</span></div>
                 <div class="section borderL borderU"><span class="borderWhite">About</span></div>
             </div>
         </div>
@@ -71,12 +72,12 @@
                 <div v-for="user in users" class="user">
                     <div class="userName">{{user.name}}</div>
                     <div class="skillBox">
-                        <div class="skills">PushUps: {{user.PushUps}} </div>
-                        <div class="skills">PullUps: {{user.PullUps}}</div>
-                        <div class="skills">Handstand Hold: {{user.HandstandHold}}</div>
-                        <div class="skills">Handstand PushUps: {{user.HandstandPushUp}}</div>
-                        <div class="skills">Frontlever: {{user.FrontLever}}</div>
-                        <div class="skills">Backlever: {{user.BackLever}}</div>
+                        <div class="skills">PushUps: <span class="red">{{user.PushUps}}</span> </div>
+                        <div class="skills">PullUps: <span class="red">{{user.PullUps}}</span></div>
+                        <div class="skills">Handstand Hold: <span class="red">{{user.HandstandHold}}</span></div>
+                        <div class="skills">Handstand PushUps: <span class="red">{{user.HandstandPushUp}}</span></div>
+                        <div class="skills">Frontlever: <span class="red">{{user.FrontLever}}</span></div>
+                        <div class="skills">Backlever: <span class="red">{{user.BackLever}}</span></div>
                     </div>
                     <button class="btn-danger" @click="personalProfileIn(user.name)">Edit</button>
                 </div>
@@ -91,27 +92,27 @@
             <form onsubmit="return false" class="formProfile">
 
                 <div class="row myRow">
-                    <div class="col-6">Current Push ups: {{users.PushUps}}</div>
+                    <div class="col-6">Current Push ups: <span class="red">{{users.PushUps}}</span></div>
                     <div class="col-6">New Record: <input type="number" placeholder="Push ups" id="pshup"></div>
                 </div>
                 <div class="row myRow">
-                    <div class="col-6">Current Pull ups: {{users.PullUps}}</div>
+                    <div class="col-6">Current Pull ups: <span class="red">{{users.PullUps}}</span></div>
                     <div class="col-6">New Record: <input type="number" placeholder="Pull ups" id="pllup"></div>
                 </div>
                 <div class="row myRow">
-                    <div class="col-6">Current HS Hold: {{users.HandstandHold}}</div>
+                    <div class="col-6">Current HS Hold: <span class="red">{{users.HandstandHold}}</span></div>
                     <div class="col-6">New Record: <input type="number" placeholder="Handstand Hold" id="hh"></div>
                 </div>
                 <div class="row myRow">
-                    <div class="col-6">Current HS Push up: {{users.HandstandPushUp}}</div>
+                    <div class="col-6">Current HS Push up: <span class="red">{{users.HandstandPushUp}}</span></div>
                     <div class="col-6">New Record: <input type="number" placeholder="Handstand Push ups" id="hp"></div>
                 </div>
                 <div class="row myRow">
-                    <div class="col-6">Current Frontlever: {{users.FrontLever}}</div>
+                    <div class="col-6">Current Frontlever: <span class="red">{{users.FrontLever}}</span></div>
                     <div class="col-6">New Record: <input type="number" placeholder="Frontlever" id="fl"></div>
                 </div>
                 <div class="row myRow">
-                    <div class="col-6">Current Backlever: {{users.BackLever}}</div>
+                    <div class="col-6">Current Backlever: <span class="red">{{users.BackLever}}</span></div>
                     <div class="col-6">New Record: <input type="number" placeholder="Backlever" id="bl"></div>
                 </div>
 
@@ -124,6 +125,49 @@
 
             </form>
         </div>
+
+        <!-- ///////////// Elements //////////// -->
+
+
+
+        <div class="disciplineTitleBox" v-if="view === 'elements'">
+            <h1 class="disciplineTitle">Elements</h1>
+            <div class="infoCenter">
+
+            
+                <div class="disciplinesBox">
+                    <div class="element" data-toggle="collapse" href="#collapseStr" role="button" aria-expanded="false" aria-controls="collapseExample">
+                        <span class="elementTitle">Strength</span>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseStr"><span v-if="element.sphere === 'strength'">{{element.name}}</span></div>
+                    </div>
+                    <div class="element" data-toggle="collapse" href="#collapseAgi" role="button" aria-expanded="false" aria-controls="collapseAgi">
+                        <span class="elementTitle">Agility</span>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseAgi"><span v-if="element.sphere === 'agility'">{{element.name}}</span></div>
+
+                    </div>
+                    <div class="element" data-toggle="collapse" href="#collapseFlex" role="button" aria-expanded="false" aria-controls="collapseFlex">
+                        <span class="elementTitle">Flexibility</span>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseFlex"><span v-if="element.sphere === 'flexibility'">{{element.name}}</span></div>
+
+                    </div>
+                    <div class="element" data-toggle="collapse" href="#collapseEnd" role="button" aria-expanded="false" aria-controls="collapseEnd">
+                        <span class="elementTitle">Endurance</span>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseEnd"><span v-if="element.sphere === 'endurance'">{{element.name}}</span></div>
+
+                    </div>
+                    <div class="element" data-toggle="collapse" href="#collapseTech" role="button" aria-expanded="false" aria-controls="collapseTech">
+                        <span class="elementTitle">Technique</span>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseTech"><span v-if="element.sphere === 'technique'">{{element.name}}</span></div>
+
+                    </div>
+                    <div class="element" data-toggle="collapse" href="#collapseSense" role="button" aria-expanded="false" aria-controls="collapseSense">
+                        <span class="elementTitle">Senses</span>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseSense"><span v-if="element.sphere === 'senses'">{{element.name}}</span></div>
+
+                    </div>
+                </div>
+            </div>
+            </div>
 
 
         <!-- ///////////// NavBar //////////// -->
