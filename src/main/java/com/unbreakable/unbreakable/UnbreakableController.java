@@ -40,6 +40,10 @@ public class UnbreakableController {
         return unbreakableService.getDisciplines();
     }
 
+    @RequestMapping("/getRoutine/{discipline}/{group}/{level}")
+    public List getRoutine(@PathVariable String discipline, @PathVariable List<String> group, @PathVariable List<Integer> level){
+        return unbreakableService.getRoutine(discipline, group, level);
+    }
     @RequestMapping("/elements")
     public List getElements(){
         return unbreakableService.getElements();

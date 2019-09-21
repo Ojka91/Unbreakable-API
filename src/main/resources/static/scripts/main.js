@@ -14,6 +14,7 @@ var app = new Vue({
     updateUserInfoOK:null,
     updateUserInfoKo:null,
     elements:[],
+    routine:[],
 
 
   },
@@ -71,12 +72,62 @@ var app = new Vue({
 
     },
 
+    generateRoutine(lvl, view){
+      this.view = 'loading'
+      if(lvl == 'beginner'){
+        fetch('http://localhost:8080/api/getRoutine/calisthenics/all/1,2', {
+            mode: 'no-cors'
+          })
+          .then((res) => res.json())
+          .then((json) => {
+            this.routine = json;
+            this.view = view;
+          })
+          .catch((err) => {
+            console.log(err);
+
+          })
+      }
+
+      if(lvl == 'advanced'){
+        fetch('http://localhost:8080/api/getRoutine/calisthenics/all/3,4,5', {
+            mode: 'no-cors'
+          })
+          .then((res) => res.json())
+          .then((json) => {
+            this.routine = json;
+            this.view = view;
+          })
+          .catch((err) => {
+            console.log(err);
+
+          })
+      }
+
+      if(lvl == 'master'){
+        fetch('http://localhost:8080/api/getRoutine/calisthenics/all/5,6', {
+            mode: 'no-cors'
+          })
+          .then((res) => res.json())
+          .then((json) => {
+            this.routine = json;
+            this.view = view;
+          })
+          .catch((err) => {
+            console.log(err);
+
+          })
+      }
+
+    },
 
 
      back(){
        if(this.view == 'personalProfile'){
          app.changeView("profile");
-       }else{
+       }else if(this.view == 'routine'){
+          app.changeView("routines")
+      }else{
          this.view = 'menu';
         }
       },

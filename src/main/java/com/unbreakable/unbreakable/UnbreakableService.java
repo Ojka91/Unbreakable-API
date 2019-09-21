@@ -93,10 +93,35 @@ public class UnbreakableService {
 
     }
 
+    public List getRoutine(String discipline, List<String> group, List<Integer> level){
+        List exercices = new ArrayList<>();
+        List routine = new ArrayList<>();
+        exercices = (exercices_calisthenicsRepository.findAll()
+                .stream()
+                .filter(el->level.contains(el.getLevel()))
+                .collect(Collectors.toList()));
+
+        Random rand = new Random();
+        int random1 = rand.nextInt(exercices.size());
+        int random2 = rand.nextInt(exercices.size());
+        int random3 = rand.nextInt(exercices.size());
+        int random4 = rand.nextInt(exercices.size());
+        int random5 = rand.nextInt(exercices.size());
+
+        routine.add(exercices.get(random1));
+        routine.add(exercices.get(random2));
+        routine.add(exercices.get(random3));
+        routine.add(exercices.get(random4));
+        routine.add(exercices.get(random5));
+
+        return routine;
+    }
+
+
+
     public List getExercices(String discipline, List<String> group, List<Integer> level){
         if(discipline.equals("calisthenics")){
-            if(!group.equals("all")){
-
+            if(!group.contains("all")){
                 return exercices_calisthenicsRepository.findAll()
                         .stream()
                         .filter(el->group.contains(el.getGroup()) && level.contains(el.getLevel()))

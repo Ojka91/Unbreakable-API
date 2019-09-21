@@ -32,12 +32,14 @@
 
         <div class="baseMenu" v-if="view === 'menu'">
             <div class="background">
-                <div class="section borderR borderD"><span class="borderWhite">Routines</span></div>
+                <div class="section borderR borderD" @click="changeView('routines')"><span
+                        class="borderWhite">Routines</span></div>
                 <div class="section borderL borderD" @click="changeView('disciplines')">
                     <span class="borderWhite">Disciplines</span></div>
                 <div class="section borderR borderU" @click="changeView('elements')">
                     <span class="borderWhite">Elements</span></div>
-                <div class="section borderL borderU"><span class="borderWhite">About</span></div>
+                <div class="section borderL borderU"><span class="borderWhite" @click="changeView('about')">About</span>
+                </div>
             </div>
         </div>
 
@@ -87,7 +89,7 @@
 
         <!-- /////////////Personal Profile //////////// -->
         <div v-if="view == 'personalProfile'" class="profilePersonalBackground">
-                <h1 class="profileTitle">{{users.name}}</h1>
+            <h1 class="profileTitle">{{users.name}}</h1>
             <div v-if="updateUserInfoKo != null" class="infoCreatingUserKo">{{updateUserInfoKo}}</div>
             <form onsubmit="return false" class="formProfile">
 
@@ -120,8 +122,8 @@
                     <div class="col-6 myRow">Password <input type="password" placeholder="Password" id="password"></div>
                     <div class="col-6 myRow"><button class="btn-danger" @click="updateProfile()">Update</button></div>
                 </div>
-                    
-                
+
+
 
             </form>
         </div>
@@ -134,40 +136,106 @@
             <h1 class="disciplineTitle">Elements</h1>
             <div class="infoCenter">
 
-            
+
                 <div class="disciplinesBox">
-                    <div class="element" data-toggle="collapse" href="#collapseStr" role="button" aria-expanded="false" aria-controls="collapseExample">
+                    <div class="element" data-toggle="collapse" href="#collapseStr" role="button" aria-expanded="false"
+                        aria-controls="collapseExample">
                         <span class="elementTitle">Strength</span>
-                        <div v-for="element in elements" class="miniElement collapse" id="collapseStr"><span v-if="element.sphere === 'strength'">{{element.name}}</span></div>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseStr"><span
+                                v-if="element.sphere === 'strength'">{{element.name}}</span></div>
                     </div>
-                    <div class="element" data-toggle="collapse" href="#collapseAgi" role="button" aria-expanded="false" aria-controls="collapseAgi">
+                    <div class="element" data-toggle="collapse" href="#collapseAgi" role="button" aria-expanded="false"
+                        aria-controls="collapseAgi">
                         <span class="elementTitle">Agility</span>
-                        <div v-for="element in elements" class="miniElement collapse" id="collapseAgi"><span v-if="element.sphere === 'agility'">{{element.name}}</span></div>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseAgi"><span
+                                v-if="element.sphere === 'agility'">{{element.name}}</span></div>
 
                     </div>
-                    <div class="element" data-toggle="collapse" href="#collapseFlex" role="button" aria-expanded="false" aria-controls="collapseFlex">
+                    <div class="element" data-toggle="collapse" href="#collapseFlex" role="button" aria-expanded="false"
+                        aria-controls="collapseFlex">
                         <span class="elementTitle">Flexibility</span>
-                        <div v-for="element in elements" class="miniElement collapse" id="collapseFlex"><span v-if="element.sphere === 'flexibility'">{{element.name}}</span></div>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseFlex"><span
+                                v-if="element.sphere === 'flexibility'">{{element.name}}</span></div>
 
                     </div>
-                    <div class="element" data-toggle="collapse" href="#collapseEnd" role="button" aria-expanded="false" aria-controls="collapseEnd">
+                    <div class="element" data-toggle="collapse" href="#collapseEnd" role="button" aria-expanded="false"
+                        aria-controls="collapseEnd">
                         <span class="elementTitle">Endurance</span>
-                        <div v-for="element in elements" class="miniElement collapse" id="collapseEnd"><span v-if="element.sphere === 'endurance'">{{element.name}}</span></div>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseEnd"><span
+                                v-if="element.sphere === 'endurance'">{{element.name}}</span></div>
 
                     </div>
-                    <div class="element" data-toggle="collapse" href="#collapseTech" role="button" aria-expanded="false" aria-controls="collapseTech">
+                    <div class="element" data-toggle="collapse" href="#collapseTech" role="button" aria-expanded="false"
+                        aria-controls="collapseTech">
                         <span class="elementTitle">Technique</span>
-                        <div v-for="element in elements" class="miniElement collapse" id="collapseTech"><span v-if="element.sphere === 'technique'">{{element.name}}</span></div>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseTech"><span
+                                v-if="element.sphere === 'technique'">{{element.name}}</span></div>
 
                     </div>
-                    <div class="element" data-toggle="collapse" href="#collapseSense" role="button" aria-expanded="false" aria-controls="collapseSense">
+                    <div class="element" data-toggle="collapse" href="#collapseSense" role="button"
+                        aria-expanded="false" aria-controls="collapseSense">
                         <span class="elementTitle">Senses</span>
-                        <div v-for="element in elements" class="miniElement collapse" id="collapseSense"><span v-if="element.sphere === 'senses'">{{element.name}}</span></div>
+                        <div v-for="element in elements" class="miniElement collapse" id="collapseSense"><span
+                                v-if="element.sphere === 'senses'">{{element.name}}</span></div>
 
                     </div>
                 </div>
             </div>
+        </div>
+
+
+        <!-- ///////////// RoutinesMain //////////// -->
+
+        <div class="routinesMain" v-if="view == 'routines'">
+            <div class="routinesMainTitle">
+                Routines
             </div>
+            <div class="routinesMainBox">
+                <div class="routineLevel" @click="generateRoutine('beginner', 'routine' )">Beginner</div>
+                <div class="routineLevel" @click="generateRoutine('advanced', 'routine')">Advanced</div>
+                <div class="routineLevel" @click="generateRoutine('master', 'routine')">Master</div>
+            </div>
+        </div>
+
+
+
+        <!-- ///////////// RoutineIn //////////// -->
+
+        <div class="routineInMain" v-if="view == 'routine'">
+            <div>
+                <p>Between 8-12 repetitions of each exercice. If any hold, stand for 30 seconds. At least 5 rounds of
+                    each</p>
+            </div>
+            <div v-for="exercice in routine">
+                <div>{{exercice.group}}, {{exercice.variation}}</div>
+            </div>
+        </div>
+
+        <!-- ///////////// About //////////// -->
+        <div class="about" v-if="view=='about'">
+            <div>
+                Unbreakable World's Training
+                <p>&copy; All rights reserved</p>
+                <p>For any inquiries contact ojkalp@gmail.com</p>
+            </div>
+        </div>
+
+
+        <!-- ///////////// Cronometer //////////// -->
+        <div class="cronometerMain" v-if="view=='cronometer'">
+                <div class="routinesMainTitle">
+                        Cronometer
+                    </div>
+            <div class="time">
+
+            </div>
+            <div class="buttonsDiv">
+                <div class="buttonsCronometer">Init</div>
+                <div class="buttonsCronometer">Stop</div>
+                <div class="buttonsCronometer">Reset</div>
+            </div>
+        </div>
+
 
 
         <!-- ///////////// NavBar //////////// -->
@@ -176,7 +244,7 @@
             <img v-show="view != 'menu'" src="style/assets/back.png" class="iconBar" alt="back" @click="back()">
             <div class="iconBar" v-if="view==='menu'"></div>
             <img src="style/assets/profile.png" class="iconBar" alt="profile" @click="changeView('profile')">
-            <img src="style/assets/time.png" class="iconBar" alt="time">
+            <img src="style/assets/time.png" class="iconBar" @click="changeView('cronometer')" alt="time">
         </div>
 
 
