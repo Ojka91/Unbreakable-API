@@ -225,19 +225,21 @@
         </div>
 
 
-        <!-- ///////////// Cronometer //////////// -->
+        <!-- ///////////// Chronometer //////////// -->
         <div class="cronometerMain" v-if="view=='cronometer'">
             <div class="routinesMainTitle">
-                Cronometer
+                Chronometer
             </div>
             <div class="time">
-
+                    <span id="chronotime">0:00:00:00</span>
             </div>
-            <div class="buttonsDiv">
-                <div class="buttonsCronometer">Init</div>
-                <div class="buttonsCronometer">Stop</div>
-                <div class="buttonsCronometer">Reset</div>
-            </div>
+            <form name="chronoForm">
+                <div class="buttonsDiv">
+                    <input type="button"  name="startstop" value="start" onClick="chronoStart()" class="buttonsCronometer" />
+                    <input type="button" name="reset" value="reset" onClick="chronoReset()" class="buttonsCronometer"/>
+                </div>
+                </form>
+                
         </div>
 
 
@@ -286,6 +288,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="scripts/main.js"></script>
+    <script src="scripts/chronometer.js"></script>
 </body>
 
 </html>
