@@ -415,3 +415,10 @@ background: rgba(255, 255, 255, 0.48);
     margin-top: 30px;
     color: white;
 }
+
+.deleteUser{
+    height: 88vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

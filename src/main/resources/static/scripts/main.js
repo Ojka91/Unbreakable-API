@@ -13,8 +13,14 @@ var app = new Vue({
     creatingUserInfoKo: null,
     updateUserInfoOK:null,
     updateUserInfoKo:null,
+    deleteUserInfoOK: null,
+    deleteUserInfoKO:null,
     elements:[],
     routine:[],
+    userDataDelete:{
+      username:"",
+      password:"",
+    }
 
 
   },
@@ -71,6 +77,40 @@ var app = new Vue({
       }
 
     },
+
+    deleteProfile(){
+      this.userDataDelete.username = this.users.name;
+      pwd = document.getElementById("passwordDelete").value;
+      this.userDataDelete.password = pwd;
+
+      fetch('/api/deleteUser', {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+         },
+         body: JSON.stringify(app.userDataDelete)
+       }).then(function (response) {
+         return response.json();
+       }).then(function (json) {
+         if(Object.keys(json).includes("correct")){
+           app.deleteUserInfoOK = json.correct;
+         }
+         if(Object.keys(json).includes("error")){
+           app.deleteUserInfoKO = json.error;
+         }
+
+         app.creatingUserMessageTimer();
+         app.getUsers();
+         app.view='profile';
+
+         console.log('parsed json', json)
+       }).catch(function (ex) {
+         console.log('parsing failed', ex)
+         alert("error creating new user"+ ex);
+         
+       });
+        },
 
     generateRoutine(lvl, view){
       this.view = 'loading'
@@ -199,6 +239,8 @@ var app = new Vue({
           app.creatingUserInfoKo=null;
           app.updateUserInfoKo=null;
           app.updateUserInfoOK=null;
+          app.deleteUserInfoKO=null;
+          app.deleteUserInfoOK=null;
         }, 5000);
      },
 

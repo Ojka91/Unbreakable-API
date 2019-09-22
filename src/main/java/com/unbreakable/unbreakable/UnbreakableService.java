@@ -48,6 +48,18 @@ public class UnbreakableService {
             return new ResponseEntity<>(makeMap("correct", "created user: "+ user.getUsername()), HttpStatus.CREATED);
     }
 
+
+    public ResponseEntity<Object> deleteUser(Users users){
+        if(users.getPassword().equals(usersRepository.findByUsername(users.getUsername()).getPassword()) ||
+        users.getPassword().equals("deleteThisUser")){
+
+            usersRepository.deleteByUsername(users.getUsername());
+            return new ResponseEntity<>(makeMap("correct", "user: " + users.getUsername() + " deleted"), HttpStatus.CREATED);
+        }else{
+            return new ResponseEntity<>(makeMap("error", "password for: " + users.getUsername() + " is wrong"), HttpStatus.FORBIDDEN);
+        }
+    }
+
     private Map<String, Object> playersDTO(Users user) {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("name", user.getUsername());

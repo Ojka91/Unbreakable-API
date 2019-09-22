@@ -70,4 +70,9 @@ public class UnbreakableController {
         return unbreakableService.updateUserInfo(userName, pushUp, pullUp, hsHold, hsPushUp, frontLever, backLever, password);
     }
 
+    @RequestMapping(path = "/deleteUser", method = RequestMethod.POST)
+    public ResponseEntity<Object> deleteUser(@RequestBody Users users){
+        return unbreakableService.deleteUser(users);
+    }
+
 }
