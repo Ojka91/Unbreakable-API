@@ -30,7 +30,7 @@ var app = new Vue({
       this.view = 'loading'
 
       if (view == "disciplines") {
-        fetch('http://localhost:8080/api/disciplines', {
+        fetch('/api/disciplines', {
             mode: 'no-cors'
           })
           .then((res) => res.json())
@@ -44,7 +44,7 @@ var app = new Vue({
           })
       }
       if (view == "elements") {
-        fetch('http://localhost:8080/api/elements', {
+        fetch('/api/elements', {
             mode: 'no-cors'
           })
           .then((res) => res.json())
@@ -59,7 +59,7 @@ var app = new Vue({
       }
 
       if (view == "profile") {
-        fetch('http://localhost:8080/api/users', {
+        fetch('/api/users', {
             mode: 'no-cors'
           })
           .then((res) => res.json())
@@ -115,7 +115,7 @@ var app = new Vue({
     generateRoutine(lvl, view){
       this.view = 'loading'
       if(lvl == 'beginner'){
-        fetch('http://localhost:8080/api/getRoutine/calisthenics/all/1,2', {
+        fetch('/api/getRoutine/calisthenics/all/1,2', {
             mode: 'no-cors'
           })
           .then((res) => res.json())
@@ -130,7 +130,7 @@ var app = new Vue({
       }
 
       if(lvl == 'advanced'){
-        fetch('http://localhost:8080/api/getRoutine/calisthenics/all/3,4,5', {
+        fetch('/api/getRoutine/calisthenics/all/3,4,5', {
             mode: 'no-cors'
           })
           .then((res) => res.json())
@@ -145,7 +145,7 @@ var app = new Vue({
       }
 
       if(lvl == 'master'){
-        fetch('http://localhost:8080/api/getRoutine/calisthenics/all/5,6', {
+        fetch('/api/getRoutine/calisthenics/all/5,6', {
             mode: 'no-cors'
           })
           .then((res) => res.json())
@@ -174,7 +174,7 @@ var app = new Vue({
 
 
      getUsers(){
-      fetch('http://localhost:8080/api/users', {
+      fetch('/api/users', {
         mode: 'no-cors'
       })
       .then((res) => res.json())
@@ -286,7 +286,7 @@ var app = new Vue({
       this.view="loading"
 
       
-        fetch('http://localhost:8080/api/users/'+userName, {
+        fetch('/api/users/'+userName, {
           mode: 'no-cors'
         })
         .then((res) => res.json())
