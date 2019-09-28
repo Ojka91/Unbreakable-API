@@ -1,4 +1,4 @@
-package com.unbreakable.unbreakable;
+package com.unbreakable.unbreakable.persistance;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
