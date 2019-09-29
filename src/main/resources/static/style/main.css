@@ -433,3 +433,23 @@ background: rgba(255, 255, 255, 0.48);
     align-items: center;
 }
 
+
+.mainMap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 88vh;
+}
+
+#marker {
+    background-image: url('/style/assets/iconBars.png');
+    background-size: cover;
+    width: 35px;
+    height: 35px;
+    
+    cursor: pointer;
+    }
+     
+.mapboxgl-popup {
+    max-width: 200px;
+    }

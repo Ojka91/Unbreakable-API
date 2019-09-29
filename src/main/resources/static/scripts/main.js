@@ -20,9 +20,7 @@ var app = new Vue({
     userDataDelete:{
       username:"",
       password:"",
-    }
-
-
+    },
   },
 
   methods: {
@@ -72,6 +70,56 @@ var app = new Vue({
 
           })
       }
+
+      if(view == "map"){
+        this.view = view;
+        var markerMiracle = [1.260306,41.1142773];
+        var markerArrabassada = [1.2728268, 41.118371]
+        var markerFrancoli = [1.2323168, 41.127014]
+
+        var divMiracle = document.createElement('div');
+        var divArrabassada = document.createElement('div');
+        var divFrancoli = document.createElement('div');
+
+
+        divMiracle.id = 'marker'; 
+        divArrabassada.id='marker';
+        divFrancoli.id = 'marker';
+      
+
+        mapboxgl.accessToken = 'pk.eyJ1Ijoib2prYTkxIiwiYSI6ImNrMTNuMnpwaDBhOTUzY3Fqd2x1czN2MngifQ.JptQgBADc6-MntgYZ3woDA',
+        map = new mapboxgl.Map({
+          container: 'map',
+          style: 'mapbox://styles/mapbox/streets-v11',
+          center: [1.2467413,41.119028],
+          zoom: 11
+        })
+
+        var popup = new mapboxgl.Popup({ offset: 25 })  
+        .setText('Construction on the Washington Monument began in 1848.');
+
+        var popito = new mapboxgl.Popup({ offset: 25 })  
+        .setText('popupdos');
+
+        new mapboxgl.Marker(divMiracle)
+        .setLngLat(markerMiracle)
+        .setPopup(popup) // sets a popup on this marker
+        .addTo(map);
+
+        new mapboxgl.Marker(divArrabassada)
+        .setLngLat(markerArrabassada)
+        .setPopup(popito) // sets a popup on this marker
+        .addTo(map);
+
+        new mapboxgl.Marker(divFrancoli)
+        .setLngLat(markerFrancoli)
+        .setPopup(popito) // sets a popup on this marker
+        .addTo(map);
+      }
+
+      
+      
+
       else{
         this.view=view;
       }
@@ -301,8 +349,14 @@ var app = new Vue({
         })
        },
     
+     
 
+  },
+  mounted: function() {
 
+  
   }
+
+  
 
 })

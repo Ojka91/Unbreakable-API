@@ -1,5 +1,5 @@
 ====================Unbreakable APP================
-			 API
+			 APP
 ===================================================
 
-First Java API for testing Unbreakable APP
+First Unbreakable APP

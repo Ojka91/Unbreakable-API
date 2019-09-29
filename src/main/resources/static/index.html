@@ -16,6 +16,10 @@
         <link rel="stylesheet" href="style/main.css">
         <link rel="stylesheet" href="style/loader.css">
 
+        <!--Mapbox-->
+        <script src='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v1.3.2/mapbox-gl.css' rel='stylesheet' />
+
     </head>
 </head>
 
@@ -26,6 +30,13 @@
             <div class="titleMain"><span>Unbreakable</span><span>App</span></div>
             <div class="enterMain" @click="changeView('menu')"><span>Enter</span></div>
         </div>
+
+        <!--MApbox-->
+        <div v-show="view==='map'" class = "mainMap">
+            <div id='map' style='width: 80%; height: 300px;'></div>
+
+        </div>
+      
 
 
         <!-- ///////////// Menu //////////// -->
@@ -231,15 +242,16 @@
                 Chronometer
             </div>
             <div class="time">
-                    <span id="chronotime">0:00:00:00</span>
+                <span id="chronotime">0:00:00:00</span>
             </div>
             <form name="chronoForm">
                 <div class="buttonsDiv">
-                    <input type="button"  name="startstop" value="start" onClick="chronoStart()" class="buttonsCronometer" />
-                    <input type="button" name="reset" value="reset" onClick="chronoReset()" class="buttonsCronometer"/>
+                    <input type="button" name="startstop" value="start" onClick="chronoStart()"
+                        class="buttonsCronometer" />
+                    <input type="button" name="reset" value="reset" onClick="chronoReset()" class="buttonsCronometer" />
                 </div>
-                </form>
-                
+            </form>
+
         </div>
 
 
@@ -247,7 +259,7 @@
         <!-- ///////////// Delete User //////////// -->
 
         <div class="deleteUser" v-if="view=='deleteUser'">
-            Password  <input type="password" placeholder="Password" id="passwordDelete" required>
+            Password <input type="password" placeholder="Password" id="passwordDelete" required>
             <button class="btn-danger" @click="deleteProfile()">Delete</button>
         </div>
 
