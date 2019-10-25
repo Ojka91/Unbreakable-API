@@ -2,9 +2,11 @@ package com.unbreakable.unbreakable.service;
 
 import com.unbreakable.unbreakable.persistance.*;
 import com.unbreakable.unbreakable.persistance.repositories.*;
+import com.unbreakable.unbreakable.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -12,6 +14,7 @@ import java.util.stream.Collectors;
 
 @Service
 public class UnbreakableService {
+
 
     @Autowired
     Exercices_CalisthenicsRepository exercices_calisthenicsRepository;
@@ -30,6 +33,9 @@ public class UnbreakableService {
 
     @Autowired
     UsersRepository usersRepository;
+
+    @Autowired
+    SecurityConfig securityConfig;
 
     //generic method to return a map
     private Map<String, Object> makeMap(String key, Object value) {
@@ -60,7 +66,7 @@ public class UnbreakableService {
         if(user.getPassword().equals("") || user.getUsername().equals("")){
             return new ResponseEntity<>(makeMap("error","Username and Password are required"), HttpStatus.FORBIDDEN);
         }
-            usersRepository.save(new Users(user.getUsername(), user.getPassword()));
+            securityConfig.saveNewUser(user.getUsername(), user.getPassword());
             return new ResponseEntity<>(makeMap("correct", "created user: "+ user.getUsername()), HttpStatus.CREATED);
     }
 
