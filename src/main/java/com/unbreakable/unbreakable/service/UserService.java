@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserService implements UserDetailsService {
+public class    UserService implements UserDetailsService {
     @Autowired
     UsersRepository usersRepository;
 
@@ -24,7 +24,7 @@ public class UserService implements UserDetailsService {
         Users user = usersRepository.findByUsername(username);
 
         List<GrantedAuthority> roles = new ArrayList<>();
-        roles.add(new SimpleGrantedAuthority("ADMIN"));
+        roles.add(new SimpleGrantedAuthority("USER"));
 
         UserDetails userDetails = new User(user.getUsername(), user.getPassword(), roles);
 

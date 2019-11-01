@@ -28,7 +28,15 @@
         <!-- ///////////// Main //////////// -->
         <div class="main" v-if="view==='main'">
             <div class="titleMain"><span>Unbreakable</span><span>App</span></div>
-            <div class="enterMain" @click="changeView('menu')"><span>Enter</span></div>
+            <span>Username</span>
+            <input type="text" placeholder="Username" id="userName">
+            <span>Password</span>
+            <input type="password" placeholder="Password" id="password">
+           
+                <div class="enterMain" @click="login()"><span>Login</span></div>
+                <div class="enterMain" @click="changeView('menu')"><span>Sign Up</span></div>
+
+          
         </div>
 
         <!--MApbox-->

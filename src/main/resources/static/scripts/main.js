@@ -8,6 +8,10 @@ var app = new Vue({
       username: "",
       password:"",
     },
+    loginData:{
+      userName: "",
+      password: "",
+    },
     users:[],
     creatingUserInfoOk: null,
     creatingUserInfoKo: null,
@@ -348,7 +352,43 @@ var app = new Vue({
   
         })
        },
+
+       getBody(json) {
+        var body = [];
+        for (var key in json) {
+            var encKey = encodeURIComponent(key);
+            var encVal = encodeURIComponent(json[key]);
+            body.push(encKey + "=" + encVal);
+        }
+        return body.join("&");
+    },
     
+
+       login(){
+     
+        this.loginData.userName = document.getElementById('userName').value;
+        this.loginData.password = document.getElementById('password').value;
+      fetch("/api/login", {
+              credentials: 'include',
+              headers: {
+                  'Content-Type': 'application/x-www-form-urlencoded'
+              },
+              method: 'POST',
+              body: this.getBody(this.loginData)
+          })
+          .then(function (data) {
+              console.log('Request success: ', data);
+              if (data.status == 200) {
+  
+              } else {
+                  alert("error login in")
+              }
+  
+          })
+          .catch(function (error) {
+              console.log('Request failure: ', error);
+          });
+       }
      
 
   },

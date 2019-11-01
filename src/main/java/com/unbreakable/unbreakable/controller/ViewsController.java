@@ -6,8 +6,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class ViewsController {
 
-    @RequestMapping("/menu")
+    @RequestMapping("/test")
     public String menu(){
         return "menu.html";
+    }
+
+    @RequestMapping("")
+    public String index() {
+        return "index.html";
     }
 }
