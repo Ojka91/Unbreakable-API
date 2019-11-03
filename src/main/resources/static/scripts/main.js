@@ -1,18 +1,24 @@
 var app = new Vue({
   el: '#app',
   data: {
+    createAccount: false,
+    userAuth: false,
+    userNameAuth: "",
     view: 'main',
     disciplines: [],
     lastView:"menu",
     userData:{
       username: "",
       password:"",
+      email:"",
     },
     loginData:{
       userName: "",
       password: "",
     },
     users:[],
+    forbidenLogin: false,
+    loginFailed: false,
     creatingUserInfoOk: null,
     creatingUserInfoKo: null,
     updateUserInfoOK:null,
@@ -213,6 +219,13 @@ var app = new Vue({
 
     },
 
+    signUp(){
+      if(!app.createAccount){
+        app.createAccount = true;
+      }else{
+        app.createUser();
+      }
+    },
 
      back(){
        if(this.view == 'personalProfile'){
@@ -243,15 +256,17 @@ var app = new Vue({
      createUser(){
        uname = document.getElementById("userName")
        pwd = document.getElementById("password")
+       email = document.getElementById("email")
 
-       if(uname.value != null && pwd.value != null){
+       if(uname.value != null && pwd.value != null && email.value != null){
         
          this.view="loading"
          this.userData.username = uname.value
          this.userData.password = pwd.value
+         this.userData.email = email.value
        
         
-         fetch('/api/users', {
+         fetch('/api/createUser', {
            credentials: 'include',
            method: 'POST',
            headers: {
@@ -263,25 +278,23 @@ var app = new Vue({
           }).then(function (json) {
             uname.value="";
             pwd.value="";
+            email.value="";
             if(Object.keys(json).includes("correct")){
               app.creatingUserInfoOk = json.correct;
             }
             if(Object.keys(json).includes("error")){
               app.creatingUserInfoKo = json.error;
             }
-
             app.creatingUserMessageTimer();
-            app.getUsers();
             console.log('parsed json', json)
           }).catch(function (ex) {
             console.log('parsing failed', ex)
             alert("error creating new user"+ ex);
             
           });
-          this.view="profile";
-         
+          this.view = "main"
         }
-        
+        app.createAccount = false;
      },
 
      creatingUserMessageTimer(){
@@ -293,6 +306,8 @@ var app = new Vue({
           app.updateUserInfoOK=null;
           app.deleteUserInfoKO=null;
           app.deleteUserInfoOK=null;
+          app.forbidenLogin=false;
+          app.loginFailed=false;
         }, 5000);
      },
 
@@ -368,6 +383,13 @@ var app = new Vue({
      
         this.loginData.userName = document.getElementById('userName').value;
         this.loginData.password = document.getElementById('password').value;
+
+        if(this.loginData.password == '' || this.loginData.userName == '' ){
+          app.forbidenLogin = true;
+          app.creatingUserMessageTimer();
+        }else{
+
+        
       fetch("/api/login", {
               credentials: 'include',
               headers: {
@@ -377,11 +399,14 @@ var app = new Vue({
               body: this.getBody(this.loginData)
           })
           .then(function (data) {
-              console.log('Request success: ', data);
               if (data.status == 200) {
-  
+                console.log('Request success: ', data);
+                app.userAuth = true;
+                app.userNameAuth = document.getElementById('userName').value;
+                app.changeView('menu');
               } else {
-                  alert("error login in")
+                app.loginFailed = true;
+                app.creatingUserMessageTimer();
               }
   
           })
@@ -389,7 +414,7 @@ var app = new Vue({
               console.log('Request failure: ', error);
           });
        }
-     
+      }
 
   },
   mounted: function() {

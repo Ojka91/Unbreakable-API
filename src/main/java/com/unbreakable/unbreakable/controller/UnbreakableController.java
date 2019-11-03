@@ -4,6 +4,7 @@ import com.unbreakable.unbreakable.service.UnbreakableService;
 import com.unbreakable.unbreakable.persistance.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,7 +55,7 @@ public class UnbreakableController {
     }
 
     //create user method (name, password)
-    @RequestMapping(path = "/users", method = RequestMethod.POST)
+    @RequestMapping(path = "/createUser", method = RequestMethod.POST)
     public ResponseEntity<Object> createUser(@RequestBody Users users){
         return unbreakableService.createUser(users);
     }
@@ -73,10 +74,10 @@ public class UnbreakableController {
 
     //update user info
     @RequestMapping(path = "/users/{userName}", method = RequestMethod.POST)
-    public ResponseEntity<Object> updateProfile(@PathVariable String userName,@RequestParam Integer pushUp, @RequestParam
+    public ResponseEntity<Object> updateProfile(@PathVariable String userName, @RequestParam Integer pushUp, @RequestParam
             Integer pullUp, @RequestParam Integer hsHold, @RequestParam Integer hsPushUp, @RequestParam Integer frontLever,
-                                                @RequestParam Integer backLever, @RequestParam String password){
-        return unbreakableService.updateUserInfo(userName, pushUp, pullUp, hsHold, hsPushUp, frontLever, backLever, password);
+                                                @RequestParam Integer backLever, @RequestParam String password, Authentication authentication){
+        return unbreakableService.updateUserInfo(userName, pushUp, pullUp, hsHold, hsPushUp, frontLever, backLever, authentication);
     }
 
     //delete user

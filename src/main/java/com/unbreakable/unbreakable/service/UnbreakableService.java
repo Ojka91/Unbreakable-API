@@ -6,6 +6,7 @@ import com.unbreakable.unbreakable.security.SecurityConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -63,10 +64,13 @@ public class UnbreakableService {
         if(usersRepository.findByUsername(user.getUsername())!=null){
             return new ResponseEntity<>(makeMap("error", "User Already Exist"), HttpStatus.FORBIDDEN);
         }
+        if(usersRepository.findByEmail(user.getEmail()) != null){
+            return new ResponseEntity<>(makeMap("error", "Email Already Exist"), HttpStatus.FORBIDDEN);
+        }
         if(user.getPassword().equals("") || user.getUsername().equals("")){
             return new ResponseEntity<>(makeMap("error","Username and Password are required"), HttpStatus.FORBIDDEN);
         }
-            securityConfig.saveNewUser(user.getUsername(), user.getPassword());
+            securityConfig.saveNewUser(user.getUsername(), user.getPassword(), user.getEmail());
             return new ResponseEntity<>(makeMap("correct", "created user: "+ user.getUsername()), HttpStatus.CREATED);
     }
 
@@ -96,11 +100,16 @@ public class UnbreakableService {
         return playersDTO(usersRepository.findByUsername(userName));
     }
 
+    private Users isAuth(Authentication authentication) {
+        return usersRepository.findByUsername(authentication.getName());
+
+    }
+
     //update user info
     public ResponseEntity<Object> updateUserInfo(String userName, Integer pushUp, Integer pullUp, Integer hsHold,
-                                                 Integer hsPushUp, Integer frontLever, Integer backLever, String password){
+                                                 Integer hsPushUp, Integer frontLever, Integer backLever, Authentication authentication){
         Users user = usersRepository.findByUsername(userName);
-        if(user.getPassword().equals(password)){
+        if(isAuth(authentication).getUsername().equals(userName)){
            if(pullUp!=null) user.setPullup(pullUp);
            if(backLever!=null) user.setBacklever(backLever);
            if(pushUp != null) user.setPushup(pushUp);
@@ -110,7 +119,7 @@ public class UnbreakableService {
             usersRepository.save(user);
             return new ResponseEntity<>(makeMap("correct", "Profile Updated"), HttpStatus.CREATED);
         }else{
-            return new ResponseEntity<>(makeMap("ko", "Wrong Password"), HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>(makeMap("ko", "You are not the User"), HttpStatus.FORBIDDEN);
         }
     }
 

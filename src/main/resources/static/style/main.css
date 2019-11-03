@@ -35,18 +35,24 @@ body::before{
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    justify-content: space-around;
+}
+.logSign{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .enterMain{
     display: flex;
+    margin-top: 10px;
     justify-content: center;
     align-items: center;
-    width: 30%;
+    width: 70%;
     height: 50px;
     color: white;
     padding-top: 5px;
-    margin-bottom: 269px;
     font-family: 'Gayathri', sans-serif;
     font-size: 20px;
     border: solid rgb(255, 255, 255) 2px;
@@ -79,7 +85,6 @@ body::before{
     font-size: 40px;
     color: rgba(224, 224, 224, 0.897);
     text-shadow: 0 0 15px rgba(255, 255, 255, 0.836), 0 0 10px rgba(255, 255, 255, 0.836);
-    padding-top: 86px;
 }
 
 .titleBackground{

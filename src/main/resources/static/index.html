@@ -26,30 +26,43 @@
 <body>
     <div id="app" class="app">
         <!-- ///////////// Main //////////// -->
-        <div class="main" v-if="view==='main'">
+        <div class="main" v-if="view==='main' && userAuth === false">
             <div class="titleMain"><span>Unbreakable</span><span>App</span></div>
-            <span>Username</span>
-            <input type="text" placeholder="Username" id="userName">
-            <span>Password</span>
-            <input type="password" placeholder="Password" id="password">
-           
-                <div class="enterMain" @click="login()"><span>Login</span></div>
-                <div class="enterMain" @click="changeView('menu')"><span>Sign Up</span></div>
+            <div class="logSign">
+                <span v-if="creatingUserInfoKo!=null" class="infoCreatingUserKo">{{creatingUserInfoKo}}</span>
+                <span v-if="creatingUserInfoOk!=null" class="infoCreatingUserOk">{{creatingUserInfoOk}}</span>
+                <span v-if="forbidenLogin" class="infoCreatingUserKo">User and Password are required</span>
+                <span v-if="loginFailed" class="infoCreatingUserKo">Wrong user or password</span>
+                <span>Username</span>
+                <input type="text" placeholder="Username" id="userName">
+                <span>Password</span>
+                <input type="password" placeholder="Password" id="password">
 
-          
+                <div v-if="createAccount == false" class="enterMain" @click="login()"><span>Login</span></div>
+                <div v-if="createAccount == false" class="enterMain" @click="signUp()"><span>New Account</span></div>
+                <span v-if="createAccount == true">Email</span>
+                <input v-if="createAccount == true" type="email" placeholder="Email" id="email">
+                <div v-if="createAccount == true" class="enterMain" @click="signUp()"><span>Sign Up!</span></div>
+                <span v-if="createAccount == true">or</span>
+                <div v-if="createAccount == true" class="enterMain" @click="createAccount = false"><span>Back</span>
+                </div>
+
+            </div>
+
+
         </div>
 
         <!--MApbox-->
-        <div v-show="view==='map'" class = "mainMap">
+        <div v-show="view==='map'" class="mainMap">
             <div id='map' style='width: 80%; height: 300px;'></div>
 
         </div>
-      
+
 
 
         <!-- ///////////// Menu //////////// -->
 
-        <div class="baseMenu" v-if="view === 'menu'">
+        <div class="baseMenu" v-if="view === 'menu'&& userAuth === true">
             <div class="background">
                 <div class="section borderR borderD" @click="changeView('routines')"><span
                         class="borderWhite">Routines</span></div>
@@ -63,7 +76,7 @@
         </div>
 
         <!-- ///////////// Disciplines //////////// -->
-        <div class="disciplineTitleBox" v-if="view === 'disciplines'">
+        <div class="disciplineTitleBox" v-if="view === 'disciplines' && userAuth === true">
             <h1 class="disciplineTitle">Discipline</h1>
             <div class="disciplinesBox">
 
@@ -74,23 +87,8 @@
 
         <!-- ///////////// Profile //////////// -->
 
-        <div class="profileBackground" v-if="view==='profile'">
-            <h1 class="profileTitle">Profile</h1>
-            <div v-if="updateUserInfoOK != null" class="infoCreatingUserOk">{{updateUserInfoOK}}</div>
-            <span v-if="creatingUserInfoOk!=null" class="infoCreatingUserOk">{{creatingUserInfoOk}}</span>
-            <span v-if="creatingUserInfoKo!=null" class="infoCreatingUserKo">{{creatingUserInfoKo}}</span>
-            <span v-if="deleteUserInfoOK!=null" class="infoCreatingUserOk">{{deleteUserInfoOK}}</span>
-            <span v-if="deleteUserInfoKO!=null" class="infoCreatingUserKo">{{deleteUserInfoKO}}</span>
-
-
-            <form onsubmit="return false">
-                <div class="form">
-                    <label>Name <input type="username" placeholder="Name" id="userName" required></label>
-                    <label>Password <input type="password" placeholder="Password" id="password" required></label>
-                    <button @click="createUser">Create</button>
-                </div>
-            </form>
-
+        <div class="profileBackground" v-if="view==='profile' && userAuth === true">
+            
             <div class="listOfUsers">
                 <span class="subTitle">Users</span>
                 <div v-for="user in users" class="user">
@@ -103,14 +101,14 @@
                         <div class="skills">Frontlever: <span class="red">{{user.FrontLever}}</span></div>
                         <div class="skills">Backlever: <span class="red">{{user.BackLever}}</span></div>
                     </div>
-                    <button class="btn-danger" @click="personalProfileIn(user.name)">Edit</button>
+                    <button v-if="user.name === userNameAuth && userAuth === true" class="btn-danger" @click="personalProfileIn(user.name)">Edit</button>
                 </div>
 
             </div>
         </div>
 
         <!-- /////////////Personal Profile //////////// -->
-        <div v-if="view == 'personalProfile'" class="profilePersonalBackground">
+        <div v-if="view == 'personalProfile' && userAuth === true" class="profilePersonalBackground">
             <h1 class="profileTitle">{{users.name}}</h1>
             <div v-if="updateUserInfoKo != null" class="infoCreatingUserKo">{{updateUserInfoKo}}</div>
             <form onsubmit="return false" class="formProfile">
@@ -155,7 +153,7 @@
 
 
 
-        <div class="disciplineTitleBox" v-if="view === 'elements'">
+        <div class="disciplineTitleBox" v-if="view === 'elements' && userAuth === true">
             <h1 class="disciplineTitle">Elements</h1>
             <div class="infoCenter">
 
@@ -209,7 +207,7 @@
 
         <!-- ///////////// RoutinesMain //////////// -->
 
-        <div class="routinesMain" v-if="view == 'routines'">
+        <div class="routinesMain" v-if="view == 'routines' && userAuth === true">
             <div class="routinesMainTitle">
                 Routines
             </div>
@@ -224,7 +222,7 @@
 
         <!-- ///////////// RoutineIn //////////// -->
 
-        <div class="routineInMain" v-if="view == 'routine'">
+        <div class="routineInMain" v-if="view == 'routine' && userAuth === true">
             <div>
                 <p>Between 8-12 repetitions of each exercice. If any hold, stand for 30 seconds. At least 5 rounds of
                     each</p>
@@ -235,7 +233,7 @@
         </div>
 
         <!-- ///////////// About //////////// -->
-        <div class="about" v-if="view=='about'">
+        <div class="about" v-if="view=='about' && userAuth === true">
             <div>
                 Unbreakable World's Training
                 <p>&copy; All rights reserved</p>
@@ -245,7 +243,7 @@
 
 
         <!-- ///////////// Chronometer //////////// -->
-        <div class="cronometerMain" v-if="view=='cronometer'">
+        <div class="cronometerMain" v-if="view=='cronometer' && userAuth === true">
             <div class="routinesMainTitle">
                 Chronometer
             </div>
@@ -266,14 +264,14 @@
 
         <!-- ///////////// Delete User //////////// -->
 
-        <div class="deleteUser" v-if="view=='deleteUser'">
+        <div class="deleteUser" v-if="view=='deleteUser' && userAuth === true">
             Password <input type="password" placeholder="Password" id="passwordDelete" required>
             <button class="btn-danger" @click="deleteProfile()">Delete</button>
         </div>
 
         <!-- ///////////// NavBar //////////// -->
 
-        <div class="navBar fixed-bottom" v-if="view!='main'&& view!='loading'">
+        <div class="navBar fixed-bottom" v-if="view!='main'&& view!='loading' && userAuth === true">
             <img v-show="view != 'menu'" src="style/assets/back.png" class="iconBar" alt="back" @click="back()">
             <div class="iconBar" v-if="view==='menu'"></div>
             <img src="style/assets/profile.png" class="iconBar" alt="profile" @click="changeView('profile')">
@@ -284,7 +282,7 @@
 
         <!-- ///////////// Loading //////////// -->
 
-        <div class="background fixed-bottom loading" v-if="view === 'loading'">
+        <div class="background fixed-bottom loading" v-if="view === 'loading' && userAuth === true">
             <div class="lds-ripple">
                 <div></div>
                 <div></div>

@@ -6,6 +6,7 @@ import com.unbreakable.unbreakable.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -47,6 +48,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
+                .antMatchers("/api/createUser").permitAll()
+
                 .antMatchers("/index").hasAnyAuthority("USER")
                 .antMatchers("/api/**").hasAnyAuthority("USER")
                 .antMatchers("/index.html").denyAll()
@@ -73,8 +76,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     }
 
-    public void saveNewUser(String username, String password){
-        usersRepository.save(new Users(username, bCryptPasswordEncoder.encode(password)));
+    public void saveNewUser(String username, String password, String email){
+        usersRepository.save(new Users(username, bCryptPasswordEncoder.encode(password), email));
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request) {
