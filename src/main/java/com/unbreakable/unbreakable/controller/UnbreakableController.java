@@ -76,7 +76,7 @@ public class UnbreakableController {
     @RequestMapping(path = "/users/{userName}", method = RequestMethod.POST)
     public ResponseEntity<Object> updateProfile(@PathVariable String userName, @RequestParam Integer pushUp, @RequestParam
             Integer pullUp, @RequestParam Integer hsHold, @RequestParam Integer hsPushUp, @RequestParam Integer frontLever,
-                                                @RequestParam Integer backLever, @RequestParam String password, Authentication authentication){
+                                                @RequestParam Integer backLever, Authentication authentication){
         return unbreakableService.updateUserInfo(userName, pushUp, pullUp, hsHold, hsPushUp, frontLever, backLever, authentication);
     }
 

@@ -318,10 +318,9 @@ var app = new Vue({
         hp = document.getElementById("hp").value;
         fl = document.getElementById("fl").value;
         bl = document.getElementById("bl").value;
-        pwd = document.getElementById("password").value;
 
         fetch('/api/users/'+app.users.name+'?pushUp='+pshup+'&pullUp='+pllup+'&hsHold='+hh+'&hsPushUp='+hp+
-        '&frontLever='+fl+'&backLever='+bl+'&password='+pwd, {
+        '&frontLever='+fl+'&backLever='+bl, {
           credentials: 'include',
           method: 'POST',
           headers: {
