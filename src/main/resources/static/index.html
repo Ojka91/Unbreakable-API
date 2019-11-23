@@ -8,6 +8,7 @@
         <meta name="viewport"
             content="width=device-width, initial-scale=1, shrink-to-fit=no,  user-scalable=no, maximum-scale=1">
         <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="apple-touch-icon" href="style/assets/logo.png">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Unbreakable App</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -90,7 +91,7 @@
         <div class="profileBackground" v-if="view==='profile' && userAuth === true">
             
             <div class="listOfUsers">
-                <span class="subTitle">Users</span>
+                <span class="disciplineTitle">Users</span>
                 <div v-for="user in users" class="user">
                     <div class="userName">{{user.name}}</div>
                     <div class="skillBox">
