@@ -37,6 +37,19 @@ var app = new Vue({
     changeView: function (view) {
       this.view = 'loading'
 
+      if(view == "calendar"){
+        fetch('/api/calendar', {
+          mode: 'no-cors'
+        })
+        .then((res) => res.json())
+        .then((json) => {
+          this.view = view;
+        })
+        .catch((err) => {
+          console.log(err);
+
+        })
+      }
       if (view == "disciplines") {
         fetch('/api/disciplines', {
             mode: 'no-cors'

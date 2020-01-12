@@ -86,4 +86,8 @@ public class UnbreakableController {
         return unbreakableService.deleteUser(users);
     }
 
+    @RequestMapping("/calendar")
+    public String goToCalendar(){
+        return "calendar";
+    }
 }
