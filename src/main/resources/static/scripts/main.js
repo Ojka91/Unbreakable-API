@@ -38,17 +38,7 @@ var app = new Vue({
       this.view = 'loading'
 
       if(view == "calendar"){
-        fetch('/api/calendar', {
-          mode: 'no-cors'
-        })
-        .then((res) => res.json())
-        .then((json) => {
-          this.view = view;
-        })
-        .catch((err) => {
-          console.log(err);
-
-        })
+       window.location.href += "calendar.html"
       }
       if (view == "disciplines") {
         fetch('/api/disciplines', {

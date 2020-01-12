@@ -88,6 +88,6 @@ public class UnbreakableController {
 
     @RequestMapping("/calendar")
     public String goToCalendar(){
-        return "calendar";
+        return "calendar.html";
     }
 }
