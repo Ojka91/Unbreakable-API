@@ -1,7 +1,11 @@
 package com.unbreakable.unbreakable.persistance;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 public class Users {
@@ -17,6 +21,11 @@ public class Users {
     private Integer frontlever;
     private Integer backlever;
 
+    @OneToMany(mappedBy = "users")
+    private Set<Activities> activities;
+
+    @OneToMany(mappedBy = "user")
+    private Set<Calendar> calendars;
 
     public Users(){
 
@@ -105,5 +114,29 @@ public class Users {
 
     public void setBacklever(Integer backlever) {
         this.backlever = backlever;
+    }
+
+    public Set<Activities> getActivities() {
+        return activities;
+    }
+
+    public void setActivities(Set<Activities> activities) {
+        this.activities = activities;
+    }
+
+    public void addActivity(Activities activity){
+        this.activities.add(activity);
+    }
+
+    public Set<Calendar> getCalendars() {
+        return calendars;
+    }
+
+    public void setCalendars(Set<Calendar> calendars) {
+        this.calendars = calendars;
+    }
+
+    public void addToCalendar(Calendar calendar){
+        this.calendars.add(calendar);
     }
 }
