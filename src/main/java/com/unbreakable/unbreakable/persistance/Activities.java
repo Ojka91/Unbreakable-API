@@ -10,7 +10,7 @@ public class Activities {
     private int id;
 
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "users")
     private Users users;
 
     @OneToMany(mappedBy = "activity")
@@ -29,6 +29,10 @@ public class Activities {
         this.name = name;
     }
 
+    public Activities(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
     public Activities(Users users, String name, String description) {
         this.users = users;
         this.name = name;

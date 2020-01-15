@@ -100,7 +100,7 @@ public class UnbreakableService {
         return playersDTO(usersRepository.findByUsername(userName));
     }
 
-    private Users isAuth(Authentication authentication) {
+    public Users isAuth(Authentication authentication) {
         return usersRepository.findByUsername(authentication.getName());
 
     }
