@@ -212,4 +212,9 @@ public class UnbreakableService {
     public List getElements(){
         return elementsRepository.findAll();
     }
+
+    public Set<Activities> getActivities(Authentication authentication){
+        Users user = isAuth(authentication);
+        return user.getActivities();
+    }
 }

@@ -1,5 +1,7 @@
 package com.unbreakable.unbreakable.persistance;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -9,6 +11,7 @@ public class Activities {
     @Id
     private int id;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "users")
     private Users users;

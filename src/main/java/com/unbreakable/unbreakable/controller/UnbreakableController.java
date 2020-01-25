@@ -2,6 +2,7 @@ package com.unbreakable.unbreakable.controller;
 
 import com.unbreakable.unbreakable.persistance.Activities;
 import com.unbreakable.unbreakable.persistance.repositories.ActivitiesRespository;
+import com.unbreakable.unbreakable.persistance.repositories.UsersRepository;
 import com.unbreakable.unbreakable.service.UnbreakableService;
 import com.unbreakable.unbreakable.persistance.Users;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @RestController
 @RequestMapping("/api")
@@ -18,9 +20,6 @@ public class UnbreakableController {
 
     @Autowired
     private UnbreakableService unbreakableService;
-
-    @Autowired
-    private ActivitiesRespository activitiesRespository;
 
     //test api connection
     @RequestMapping("")
@@ -91,11 +90,9 @@ public class UnbreakableController {
         return unbreakableService.deleteUser(users);
     }
 
-    @RequestMapping("/calendar")
-    public List<Activities> goToCalendar(Authentication authentication){
-        Users user = unbreakableService.isAuth(authentication);
-        Activities activities = new Activities(user,"karate", "entrenobueno");
-        activitiesRespository.save(activities);
-        return activitiesRespository.findByUsers(user);
+
+    @RequestMapping("/getActivities")
+    public Set<Activities> getActivities(Authentication authentication){
+        return unbreakableService.getActivities(authentication);
     }
 }

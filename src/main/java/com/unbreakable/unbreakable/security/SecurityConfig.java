@@ -49,8 +49,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
         http.authorizeRequests()
                 .antMatchers("/api/createUser").permitAll()
-                .antMatchers("/api/calendar").permitAll()
-
                 .antMatchers("/index").hasAnyAuthority("USER")
                 .antMatchers("/api/**").hasAnyAuthority("USER")
                 .antMatchers("/index.html").denyAll()
