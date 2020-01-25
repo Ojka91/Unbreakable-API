@@ -3,6 +3,7 @@ package com.unbreakable.unbreakable.service;
 import com.unbreakable.unbreakable.persistance.*;
 import com.unbreakable.unbreakable.persistance.repositories.*;
 import com.unbreakable.unbreakable.security.SecurityConfig;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import javax.swing.undo.AbstractUndoableEdit;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -34,6 +36,9 @@ public class UnbreakableService {
 
     @Autowired
     UsersRepository usersRepository;
+
+    @Autowired
+    ActivitiesRespository activitiesRespository;
 
     @Autowired
     SecurityConfig securityConfig;
@@ -216,5 +221,24 @@ public class UnbreakableService {
     public Set<Activities> getActivities(Authentication authentication){
         Users user = isAuth(authentication);
         return user.getActivities();
+    }
+
+    public ResponseEntity<Object> addActivity(Activities activities, Authentication authentication) {
+        Users users = usersRepository.findByUsername(authentication.getName());
+        if (activities.getName() != null && !activities.getName().equals("")) {
+            List<String> activitiesName = new ArrayList<>();
+            for (Activities activity :
+                    users.getActivities()) {
+                activitiesName.add(activity.getName().trim().toUpperCase());
+            }
+            if (!activitiesName.contains(activities.getName())) {
+                activitiesRespository.save(activities);
+                return new ResponseEntity<>(makeMap("correct", "Activity " + activities.getName() +
+                        " created"), HttpStatus.CREATED);
+            }
+        }
+        return new ResponseEntity<>(makeMap("KO", "Activity " + activities.getName() +
+                " already exist"), HttpStatus.FORBIDDEN);
+
     }
 }
