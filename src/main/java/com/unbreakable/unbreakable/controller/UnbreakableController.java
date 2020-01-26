@@ -97,7 +97,7 @@ public class UnbreakableController {
     }
 
     @RequestMapping(path = "/addActivity", method = RequestMethod.POST)
-    public ResponseEntity<Object> addActivity(@RequestBody String nameActivity, String description, Authentication authentication){
-        return unbreakableService.addActivity(nameActivity, description, authentication);
+    public ResponseEntity<Object> addActivity(@RequestBody Activities activities, Authentication authentication){
+        return unbreakableService.addActivity(activities, authentication);
     }
 }

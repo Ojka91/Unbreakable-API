@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,24 +14,30 @@
 
     <title>Calendar</title>
     <script>
-     document.addEventListener('DOMContentLoaded', function() {
-        var calendarEl = document.getElementById('calendar');
+        document.addEventListener('DOMContentLoaded', function () {
+            var calendarEl = document.getElementById('calendar');
 
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          plugins: [ 'dayGrid' ]
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                plugins: ['dayGrid']
+            });
+
+            calendar.render();
         });
-
-        calendar.render();
-      });
-      </script>
+    </script>
 </head>
+
 <body>
     <h2>Activities</h2>
     <br>
     <div id="activities"></div>
-    <div>New activity<input type="text" id="name" placeholder="Name"> <input type="text" id="description" placeholder="Description"></div>
-    <div id="addActivity">Add</div>
+    <div class="activities" id="newActivity">New activity
+    </div>
+    <div id="activityInputs" class="activityInputs">
+        <input type="text" id="name" placeholder="Name"> <input type="text" id="description" placeholder="Description">
+        <button id="addActivity" onclick="addActivity()">Add</button>
+    </div>
     <div id='calendar'></div>
 
 </body>
+
 </html>
