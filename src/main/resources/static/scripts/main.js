@@ -5,7 +5,7 @@ var app = new Vue({
     userAuth: false,
     userNameAuth: "",
     view: 'main',
-    disciplines: [],
+    activities: [],
     lastView:"menu",
     userData:{
       username: "",
@@ -40,19 +40,10 @@ var app = new Vue({
       if(view == "calendar"){
        window.location.href += "calendar.html"
       }
-      if (view == "disciplines") {
-        fetch('/api/disciplines', {
-            mode: 'no-cors'
-          })
-          .then((res) => res.json())
-          .then((json) => {
-            this.disciplines = json;
-            this.view = view;
-          })
-          .catch((err) => {
-            console.log(err);
-
-          })
+      if (view == "calendar") {
+      
+            window.location.href = window.location.href + "calendar.html"
+         
       }
       if (view == "elements") {
         fetch('/api/elements', {

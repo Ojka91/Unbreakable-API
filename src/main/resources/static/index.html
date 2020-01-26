@@ -67,8 +67,8 @@
             <div class="background">
                 <div class="section borderR borderD" @click="changeView('routines')"><span
                         class="borderWhite">Routines</span></div>
-                <div class="section borderL borderD" @click="changeView('disciplines')">
-                    <span class="borderWhite">Disciplines</span></div>
+                <div class="section borderL borderD" @click="changeView('calendar')">
+                    <span class="borderWhite">Calendar</span></div>
                 <div class="section borderR borderU" @click="changeView('elements')">
                     <span class="borderWhite">Elements</span></div>
                 <div class="section borderL borderU"><span class="borderWhite" @click="changeView('about')">About</span>
@@ -76,7 +76,7 @@
             </div>
         </div>
 
-        <!-- ///////////// Disciplines //////////// -->
+        <!-- ///////////// Disciplines (unused)//////////// -->
         <div class="disciplineTitleBox" v-if="view === 'disciplines' && userAuth === true">
             <h1 class="disciplineTitle">Discipline</h1>
             <div class="disciplinesBox">

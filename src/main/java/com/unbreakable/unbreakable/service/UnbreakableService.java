@@ -223,21 +223,22 @@ public class UnbreakableService {
         return user.getActivities();
     }
 
-    public ResponseEntity<Object> addActivity(Activities activities, Authentication authentication) {
+    public ResponseEntity<Object> addActivity(String name, String description, Authentication authentication) {
         Users users = usersRepository.findByUsername(authentication.getName());
-        if (activities.getName() != null && !activities.getName().equals("")) {
+        if (name != null && !name.equals("")) {
             List<String> activitiesName = new ArrayList<>();
             for (Activities activity :
                     users.getActivities()) {
                 activitiesName.add(activity.getName().trim().toUpperCase());
             }
-            if (!activitiesName.contains(activities.getName())) {
-                activitiesRespository.save(activities);
-                return new ResponseEntity<>(makeMap("correct", "Activity " + activities.getName() +
+            if (!activitiesName.contains(name)) {
+                Activities activityToSave = new Activities(users, name, description);
+                activitiesRespository.save(activityToSave);
+                return new ResponseEntity<>(makeMap("correct", "Activity " + name +
                         " created"), HttpStatus.CREATED);
             }
         }
-        return new ResponseEntity<>(makeMap("KO", "Activity " + activities.getName() +
+        return new ResponseEntity<>(makeMap("KO", "Activity " + name +
                 " already exist"), HttpStatus.FORBIDDEN);
 
     }
