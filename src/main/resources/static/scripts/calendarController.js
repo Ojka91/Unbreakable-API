@@ -42,16 +42,17 @@ function printActivities() {
         div.append(element.name);
         act.append(div);
         btn = document.createElement("input")
-        btn.type ="button";
+        btn.type = "button";
         btn.value = "Delete"
-        btn.id = "delete"+element.name
+        btn.id = element.name
         act.append(btn);
         addListener(element.name);
 
     });
 }
-function addListener(element){
-    document.getElementById("delete"+element).addEventListener("click", function(element){
+
+function addListener(element) {
+    document.getElementById(element).addEventListener("click", function (element) {
         deleteActivity(element);
     });
 }
@@ -61,43 +62,66 @@ function fillActivity() {
     activity.description = inputDes.value;
 }
 
-function addNewActivityDiv(){
-    if (newActivity == false){
+function addNewActivityDiv() {
+    if (newActivity == false) {
         document.getElementById("activityInputs").style.display = "block";
         newActivity = true;
-    }else{
+    } else {
         document.getElementById("activityInputs").style.display = "none";
         newActivity = false;
     }
 }
 
-function addActivityAction(){
+function addActivityAction() {
     fetch('/api/addActivity', {
         credentials: 'include',
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
-         },
-         body: JSON.stringify(activity)
-       }).then(function (response) {
-         return response.json();
-       }).then(function (json) {
-         if(Object.keys(json).includes("correct")){
-           console.log("activity correct")
-           addNewActivityDiv();
-         }
-         if(Object.keys(json).includes("KO")){
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(activity)
+    }).then(function (response) {
+        return response.json();
+    }).then(function (json) {
+        if (Object.keys(json).includes("correct")) {
+            console.log("activity correct")
+            addNewActivityDiv();
+        }
+        if (Object.keys(json).includes("KO")) {
             console.log("error")
         }
 
-         console.log('parsed json', json)
-       }).catch(function (ex) {
-         console.log('parsing failed', ex)
-         alert("error creating new user"+ ex);
-         
-       });
+        console.log('parsed json', json)
+    }).catch(function (ex) {
+        console.log('parsing failed', ex)
+        alert("error creating new user" + ex);
+
+    });
 }
 
-function deleteActivity(element){
-    console.log("jj"+element.srcElement.value)
+function deleteActivity(element) {
+    console.log("jj" + element.toElement.id)
+    fetch('/api/deleteActivity', {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: element.toElement.id
+    }).then(function (response) {
+        return response.json();
+    }).then(function (json) {
+        if (Object.keys(json).includes("correct")) {
+            console.log("activity correct")
+            printActivities()
+        }
+        if (Object.keys(json).includes("KO")) {
+            console.log("error")
+        }
+
+        console.log('parsed json', json)
+    }).catch(function (ex) {
+        console.log('parsing failed', ex)
+
+    });
 }
