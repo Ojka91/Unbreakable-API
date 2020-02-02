@@ -231,7 +231,7 @@ public class UnbreakableService {
                     users.getActivities()) {
                 activitiesName.add(activity.getName().trim().toUpperCase());
             }
-            if (!activitiesName.contains(activities.getName())) {
+            if (!activitiesName.contains(activities.getName().trim().toUpperCase())) {
                 Activities activityToSave = new Activities(users, activities.getName(), activities.getDescription());
                 activitiesRespository.save(activityToSave);
                 return new ResponseEntity<>(makeMap("correct", "Activity " + activities.getName() +
@@ -241,5 +241,20 @@ public class UnbreakableService {
         return new ResponseEntity<>(makeMap("KO", "Activity " + activities.getName() +
                 " already exist"), HttpStatus.FORBIDDEN);
 
+    }
+
+    public ResponseEntity<Object> deleteActivity(String name, Authentication authentication){
+                Users user = isAuth(authentication);
+                int activityId;
+        for (Activities activity:
+             user.getActivities()) {
+            if(activity.getName().equals(name)){
+                activityId = activity.getId();
+                activitiesRespository.deleteById(activityId);
+                return new ResponseEntity<>(makeMap("correct", "Deleted activity " + activity.getName()), HttpStatus.CREATED);
+            }
+        }
+
+        return new ResponseEntity<>(makeMap("error", "Not activity found "), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

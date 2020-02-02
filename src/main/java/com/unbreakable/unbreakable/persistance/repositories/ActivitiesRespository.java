@@ -11,4 +11,6 @@ import java.util.List;
 @RepositoryRestResource
 public interface ActivitiesRespository extends JpaRepository<Activities, String> {
     List<Activities> findByUsers(Users user);
+    @Transactional
+    Long deleteById(int username);
 }

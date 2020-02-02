@@ -8,6 +8,7 @@ var inputDes;
 var newActivity = false;
 var newActivityDiv;
 var addActivity;
+var activityToDelete;
 
 fetch('/api/getActivities', {
         mode: 'no-cors'
@@ -40,6 +41,18 @@ function printActivities() {
         div = document.createElement("div")
         div.append(element.name);
         act.append(div);
+        btn = document.createElement("input")
+        btn.type ="button";
+        btn.value = "Delete"
+        btn.id = "delete"+element.name
+        act.append(btn);
+        addListener(element.name);
+
+    });
+}
+function addListener(element){
+    document.getElementById("delete"+element).addEventListener("click", function(element){
+        deleteActivity(element);
     });
 }
 
@@ -71,6 +84,7 @@ function addActivityAction(){
        }).then(function (json) {
          if(Object.keys(json).includes("correct")){
            console.log("activity correct")
+           addNewActivityDiv();
          }
          if(Object.keys(json).includes("KO")){
             console.log("error")
@@ -82,4 +96,8 @@ function addActivityAction(){
          alert("error creating new user"+ ex);
          
        });
+}
+
+function deleteActivity(element){
+    console.log("jj"+element.srcElement.value)
 }

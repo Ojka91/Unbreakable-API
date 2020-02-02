@@ -100,4 +100,9 @@ public class UnbreakableController {
     public ResponseEntity<Object> addActivity(@RequestBody Activities activities, Authentication authentication){
         return unbreakableService.addActivity(activities, authentication);
     }
+
+    @RequestMapping(path = "/deleteActivity", method = RequestMethod.POST)
+    public ResponseEntity<Object> deleteActivity(@RequestBody String name, Authentication authentication){
+        return unbreakableService.deleteActivity(name, authentication);
+    }
 }
