@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -105,4 +106,10 @@ public class UnbreakableController {
     public ResponseEntity<Object> deleteActivity(@RequestBody String name, Authentication authentication){
         return unbreakableService.deleteActivity(name, authentication);
     }
+
+    @RequestMapping(path = "/addCalendar", method = RequestMethod.POST)
+    public ResponseEntity<Object> addCalendar(@RequestBody Object info,  Authentication authentication ){
+        return unbreakableService.addCalendar(info, authentication);
+    }
+
 }

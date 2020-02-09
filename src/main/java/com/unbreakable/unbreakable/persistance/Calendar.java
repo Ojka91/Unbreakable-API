@@ -12,21 +12,21 @@ public class Calendar {
     @Id
     private int id;
 
-    private Date date;
+    private java.util.Calendar date;
 
     @ManyToOne
-    @JoinColumn(name = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "user_id")
     private Users user;
 
     @ManyToOne
-    @JoinColumn(name ="id", insertable = false, updatable = false)
+    @JoinColumn(name ="activity_id")
     private Activities activity;
 
     public Calendar(){
 
     }
 
-    public Calendar(Date date, Users user, Activities activity) {
+    public Calendar(java.util.Calendar date, Users user, Activities activity) {
         this.date = date;
         this.user = user;
         this.activity = activity;
@@ -40,11 +40,11 @@ public class Calendar {
         this.id = id;
     }
 
-    public Date getDate() {
+    public java.util.Calendar getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(java.util.Calendar date) {
         this.date = date;
     }
 

@@ -56,6 +56,9 @@ function addListener(element) {
         deleteActivity(element);
     });
 }
+function back(){
+    window.location = window.location.origin
+}
 
 function fillActivity() {
     activity.name = inputName.value;

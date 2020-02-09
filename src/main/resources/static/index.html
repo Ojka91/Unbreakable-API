@@ -63,6 +63,7 @@
 
         <!-- ///////////// Menu //////////// -->
 
+        <button @click="addCalendar()">Addcalendar</button>
         <div class="baseMenu" v-if="view === 'menu'&& userAuth === true">
             <div class="background">
                 <div class="section borderR borderD" @click="changeView('routines')"><span

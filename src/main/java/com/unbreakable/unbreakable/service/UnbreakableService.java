@@ -1,6 +1,7 @@
 package com.unbreakable.unbreakable.service;
 
 import com.unbreakable.unbreakable.persistance.*;
+import com.unbreakable.unbreakable.persistance.Calendar;
 import com.unbreakable.unbreakable.persistance.repositories.*;
 import com.unbreakable.unbreakable.security.SecurityConfig;
 import net.bytebuddy.asm.Advice;
@@ -39,6 +40,9 @@ public class UnbreakableService {
 
     @Autowired
     ActivitiesRespository activitiesRespository;
+
+    @Autowired
+    CalendarRepository calendarRepository;
 
     @Autowired
     SecurityConfig securityConfig;
@@ -256,5 +260,18 @@ public class UnbreakableService {
         }
 
         return new ResponseEntity<>(makeMap("error", "Not activity found "), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
+    public ResponseEntity<Object> addCalendar(Object info, Authentication authentication){
+      Users user = isAuth(authentication);
+      List<Activities> activities = user.getActivities()
+              .stream().filter(el->el.getName().equals(info.name)).collect(Collectors.toList());
+      Activities activity = activities.get(0);
+        java.util.Calendar date = new GregorianCalendar(year, month, day);
+      Calendar calendar = new Calendar(date, user, activity);
+      calendarRepository.save(calendar);
+        return new ResponseEntity<>(makeMap("Ok", "Activity saved"), HttpStatus.CREATED);
+
+
     }
 }
