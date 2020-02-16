@@ -1,6 +1,5 @@
 var app = new Vue({
   el: '#app',
-  calendar: new FormData(),
   data: {
     createAccount: false,
     userAuth: false,
@@ -303,39 +302,6 @@ var app = new Vue({
           app.forbidenLogin = false;
           app.loginFailed = false;
         }, 5000);
-    },
-
-    addCalendar(){
-      app.calendar.append('year', 2015)
-      app.calendar.append('month', 06)
-      app.calendar.append('day', 24)
-
-      fetch('/api/addCalendar', {
-        credentials: 'include',
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: app.calendar
-      }).then(function (response) {
-        return response.json();
-      }).then(function (json) {
-        uname.value = "";
-        pwd.value = "";
-        email.value = "";
-        if (Object.keys(json).includes("correct")) {
-          app.creatingUserInfoOk = json.correct;
-        }
-        if (Object.keys(json).includes("error")) {
-          app.creatingUserInfoKo = json.error;
-        }
-        app.creatingUserMessageTimer();
-        console.log('parsed json', json)
-      }).catch(function (ex) {
-        console.log('parsing failed', ex)
-        alert("error creating new user" + ex);
-
-      });
     },
 
     updateProfile() {

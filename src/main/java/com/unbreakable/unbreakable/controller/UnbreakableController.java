@@ -108,8 +108,9 @@ public class UnbreakableController {
     }
 
     @RequestMapping(path = "/addCalendar", method = RequestMethod.POST)
-    public ResponseEntity<Object> addCalendar(@RequestBody Object info,  Authentication authentication ){
-        return unbreakableService.addCalendar(info, authentication);
+    public ResponseEntity<Object> addCalendar(@RequestParam String activityName, @RequestParam int day, @RequestParam int month,
+                                              @RequestParam int year, Authentication authentication ){
+        return unbreakableService.addCalendar(activityName, day, month, year, authentication);
     }
 
 }

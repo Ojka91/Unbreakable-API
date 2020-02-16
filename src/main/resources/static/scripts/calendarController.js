@@ -3,12 +3,22 @@ var activity = {
     name: "",
     description: "",
 }
+var calendar = {
+    activityName: 'test',
+    day: 05,
+    month: 02,
+    year: 2019,
+}
+
 var inputName;
 var inputDes;
 var newActivity = false;
 var newActivityDiv;
 var addActivity;
 var activityToDelete;
+var date = {
+
+}
 
 fetch('/api/getActivities', {
         mode: 'no-cors'
@@ -28,11 +38,13 @@ window.onload = function () {
     inputDes = document.getElementById("description");
     newActivityDiv = document.getElementById("newActivity");
     addActivity = document.getElementById("addActivity");
+    addCalendar = document.getElementById('addCalendar')
 
     inputName.addEventListener("change", fillActivity);
     inputDes.addEventListener("change", fillActivity);
     newActivityDiv.addEventListener("click", addNewActivityDiv);
     addActivity.addEventListener("click", addActivityAction);
+    addCalendar.addEventListener('click', addCalendarAction)
 }
 
 function printActivities() {
@@ -125,6 +137,33 @@ function deleteActivity(element) {
         console.log('parsed json', json)
     }).catch(function (ex) {
         console.log('parsing failed', ex)
+
+    });
+}
+
+function addCalendarAction() {
+    fetch('/api/addCalendar?activityName='+ calendar.activityName + '&day=' + calendar.day + '&month='
+        + calendar.month + '&year=' + calendar.year, {
+        credentials: 'include',
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }).then(function (response) {
+        return response.json();
+    }).then(function (json) {
+        if (Object.keys(json).includes("correct")) {
+            console.log("activity correct")
+            addNewActivityDiv();
+        }
+        if (Object.keys(json).includes("KO")) {
+            console.log("error")
+        }
+
+        console.log('parsed json', json)
+    }).catch(function (ex) {
+        console.log('parsing failed', ex)
+        alert("error creating new user" + ex);
 
     });
 }
