@@ -1,5 +1,7 @@
 package com.unbreakable.unbreakable.persistance;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -14,6 +16,7 @@ public class Calendar {
 
     private java.util.Calendar date;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id")
     private Users user;

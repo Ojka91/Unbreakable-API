@@ -1,6 +1,7 @@
 package com.unbreakable.unbreakable.controller;
 
 import com.unbreakable.unbreakable.persistance.Activities;
+import com.unbreakable.unbreakable.persistance.Calendar;
 import com.unbreakable.unbreakable.persistance.repositories.ActivitiesRespository;
 import com.unbreakable.unbreakable.persistance.repositories.UsersRepository;
 import com.unbreakable.unbreakable.service.UnbreakableService;
@@ -111,6 +112,11 @@ public class UnbreakableController {
     public ResponseEntity<Object> addCalendar(@RequestParam String activityName, @RequestParam int day, @RequestParam int month,
                                               @RequestParam int year, Authentication authentication ){
         return unbreakableService.addCalendar(activityName, day, month, year, authentication);
+    }
+
+    @RequestMapping(path="/getCalendar")
+    public Set<Calendar> getCalendar(Authentication authentication){
+        return unbreakableService.getCalendar(authentication);
     }
 
 }

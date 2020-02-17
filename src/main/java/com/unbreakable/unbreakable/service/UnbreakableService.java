@@ -272,4 +272,8 @@ public class UnbreakableService {
       calendarRepository.save(calendar);
         return new ResponseEntity<>(makeMap("Ok", "Activity saved"), HttpStatus.CREATED);
     }
+
+    public Set<Calendar> getCalendar(Authentication authentication){
+       return isAuth(authentication).getCalendars();
+    }
 }

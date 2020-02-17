@@ -10,6 +10,8 @@ var calendar = {
     year: 2019,
 }
 
+var calendarInfo;
+
 var inputName;
 var inputDes;
 var newActivity = false;
@@ -59,7 +61,6 @@ function printActivities() {
         btn.id = element.name
         act.append(btn);
         addListener(element.name);
-
     });
 }
 
