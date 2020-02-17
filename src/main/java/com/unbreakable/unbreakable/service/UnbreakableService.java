@@ -13,6 +13,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.swing.undo.AbstractUndoableEdit;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -64,6 +66,14 @@ public class UnbreakableService {
         dto.put("HandstandPushUp", user.getHandstandpushup());
         dto.put("FrontLever", user.getFrontlever());
         dto.put("BackLever", user.getBacklever());
+        return dto;
+    }
+
+    //DTO to get calendar info
+    private Map<String,Object> calendarDTO(Calendar calendar){
+        Map<String, Object> dto = new LinkedHashMap<String, Object>();
+        dto.put("title", calendar.getActivity().getName());
+        dto.put("start", calendar.getDate());
         return dto;
     }
 
@@ -264,16 +274,24 @@ public class UnbreakableService {
 
     public ResponseEntity<Object> addCalendar(String activityName, int day, int month, int year, Authentication authentication){
       Users user = isAuth(authentication);
-      List<Activities> activities = user.getActivities()
-              .stream().filter(el->el.getName().equals(activityName)).collect(Collectors.toList());
+      List<Activities> activities = user
+              .getActivities()
+              .stream()
+              .filter(el->el.getName().equals(activityName))
+              .collect(Collectors.toList());
       Activities activity = activities.get(0);
-        java.util.Calendar date = new GregorianCalendar(year, month, day);
+      LocalDate date = LocalDate.of(year, month, day);
       Calendar calendar = new Calendar(date, user, activity);
       calendarRepository.save(calendar);
-        return new ResponseEntity<>(makeMap("Ok", "Activity saved"), HttpStatus.CREATED);
+        return new ResponseEntity<>(makeMap("Ok", "Activity saved on calendar"), HttpStatus.CREATED);
     }
 
-    public Set<Calendar> getCalendar(Authentication authentication){
-       return isAuth(authentication).getCalendars();
+    public List<Object> getCalendar(Authentication authentication){
+      Set<Calendar> calendar = isAuth(authentication).getCalendars();
+      List<Object> calendarFinal = new ArrayList();
+        for (Calendar c:calendar) {
+            calendarFinal.add(calendarDTO(c));
+        }
+        return calendarFinal;
     }
 }

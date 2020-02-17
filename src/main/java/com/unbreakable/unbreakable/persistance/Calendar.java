@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import java.time.LocalDate;
 import java.util.Date;
 
 @Entity
@@ -14,7 +15,7 @@ public class Calendar {
     @Id
     private int id;
 
-    private java.util.Calendar date;
+    private LocalDate date;
 
     @JsonIgnore
     @ManyToOne
@@ -29,7 +30,7 @@ public class Calendar {
 
     }
 
-    public Calendar(java.util.Calendar date, Users user, Activities activity) {
+    public Calendar(LocalDate date, Users user, Activities activity) {
         this.date = date;
         this.user = user;
         this.activity = activity;
@@ -43,11 +44,11 @@ public class Calendar {
         this.id = id;
     }
 
-    public java.util.Calendar getDate() {
+    public LocalDate getDate() {
         return date;
     }
 
-    public void setDate(java.util.Calendar date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
 

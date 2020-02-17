@@ -115,7 +115,7 @@ public class UnbreakableController {
     }
 
     @RequestMapping(path="/getCalendar")
-    public Set<Calendar> getCalendar(Authentication authentication){
+    public List<Object> getCalendar(Authentication authentication){
         return unbreakableService.getCalendar(authentication);
     }
 
