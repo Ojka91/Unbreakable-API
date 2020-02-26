@@ -10,6 +10,8 @@ var calendar = {
     year: 2019,
 }
 
+
+
 var calendarInfo;
 
 var inputName;
@@ -22,6 +24,21 @@ var date = {
 
 }
 
+function getCalendars(){
+    fetch('/api/getCalendar', {
+        mode: 'no-cors'
+    })
+    .then((res) => res.json())
+    .then((json) => {
+       calendar = json;
+    })
+    .catch((err) => {
+        console.log(err);
+
+    })
+    return calendar;
+}
+
 fetch('/api/getActivities', {
         mode: 'no-cors'
     })
@@ -29,6 +46,8 @@ fetch('/api/getActivities', {
     .then((json) => {
         this.activities = json;
         printActivities();
+        printActivitiesModal()
+
     })
     .catch((err) => {
         console.log(err);
@@ -63,6 +82,20 @@ function printActivities() {
         addListener(element.name);
     });
 }
+
+function printActivitiesModal(){
+    act = document.getElementById("activitiesModal")
+    activities.forEach(element => {
+        cb = document.createElement("input");
+        cb.setAttribute("type", "checkbox");
+        cb.setAttribute("id", element.name)
+        cb.setAttribute("value", element.name)
+        div = document.createElement("div")
+        div.append(cb, element.name);
+        act.append(div);
+    });
+}
+
 
 function addListener(element) {
     document.getElementById(element).addEventListener("click", function (element) {
@@ -156,6 +189,7 @@ function addCalendarAction() {
         if (Object.keys(json).includes("correct")) {
             console.log("activity correct")
             addNewActivityDiv();
+            $('#calendar').fullCalendar('renderEvents', getCalendars())
         }
         if (Object.keys(json).includes("KO")) {
             console.log("error")
