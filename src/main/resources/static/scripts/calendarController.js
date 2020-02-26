@@ -59,17 +59,16 @@ window.onload = function () {
     inputDes = document.getElementById("description");
     newActivityDiv = document.getElementById("newActivity");
     addActivity = document.getElementById("addActivity");
-    addCalendar = document.getElementById('addCalendar')
 
     inputName.addEventListener("change", fillActivity);
     inputDes.addEventListener("change", fillActivity);
     newActivityDiv.addEventListener("click", addNewActivityDiv);
     addActivity.addEventListener("click", addActivityAction);
-    addCalendar.addEventListener('click', addCalendarAction)
 }
 
 function printActivities() {
     act = document.getElementById("activities")
+    act.innerHTML = ''
     activities.forEach(element => {
         div = document.createElement("div")
         div.append(element.name);
@@ -139,7 +138,7 @@ function addActivityAction() {
         if (Object.keys(json).includes("KO")) {
             console.log("error")
         }
-
+        printActivities()
         console.log('parsed json', json)
     }).catch(function (ex) {
         console.log('parsing failed', ex)
@@ -163,9 +162,12 @@ function deleteActivity(element) {
         if (Object.keys(json).includes("correct")) {
             console.log("activity correct")
             printActivities()
+
         }
         if (Object.keys(json).includes("KO")) {
             console.log("error")
+            printActivities()
+
         }
 
         console.log('parsed json', json)
