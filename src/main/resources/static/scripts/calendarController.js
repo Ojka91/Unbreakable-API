@@ -150,6 +150,7 @@ function addActivityAction() {
             console.log("error")
         }
         printActivities()
+        location.reload()
         console.log('parsed json', json)
     }).catch(function (ex) {
         console.log('parsing failed', ex)
@@ -180,7 +181,7 @@ function deleteActivity(element) {
             printActivities()
 
         }
-
+        location.reload()
         console.log('parsed json', json)
     }).catch(function (ex) {
         console.log('parsing failed', ex)
