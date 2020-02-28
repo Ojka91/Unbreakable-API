@@ -35,11 +35,15 @@
 
 <body>
   <h2>Activities</h2>
-  <button onclick="back()">Back</button>
+  <button onclick="back()" class="btn-secondary">Back</button>
   <br>
-  <div id="activities"></div>
-  <div class="activities" id="newActivity">New activity
+  <div class="hideShowBtnDiv">
+    <button class="hideShowBtn, btn-success" id="hideShowBtn">Show Activities</button>
   </div>
+  <div class="hideShowDiv" id="hideShowDiv">
+    <div id="activities"></div>
+  </div>
+  <div class="activities" id="newActivity"><button class="newActivity, btn-success">New activity</button></div>
   <div id="activityInputs" class="activityInputs">
     <input type="text" id="name" placeholder="Name"> <input type="text" id="description" placeholder="Description">
     <button id="addActivity">Add</button>
@@ -80,12 +84,13 @@
         right: 'today, prev, next',
 
       },
+      firstDay: 1,
       dayClick: function (date, jsEvent, view) {
 
         $("#addActivityModal").modal();
-    
+
         calendar.day = date.get('date')
-        calendar.month = date.month()+1
+        calendar.month = date.month() + 1
         calendar.year = date.year()
 
 

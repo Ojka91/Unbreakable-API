@@ -10,8 +10,6 @@ var calendar = {
     year: 2019,
 }
 
-
-
 var calendarInfo;
 
 var inputName;
@@ -59,25 +57,38 @@ window.onload = function () {
     inputDes = document.getElementById("description");
     newActivityDiv = document.getElementById("newActivity");
     addActivity = document.getElementById("addActivity");
+    hideShowBtn = document.getElementById("hideShowBtn");
 
     inputName.addEventListener("change", fillActivity);
     inputDes.addEventListener("change", fillActivity);
     newActivityDiv.addEventListener("click", addNewActivityDiv);
     addActivity.addEventListener("click", addActivityAction);
+    hideShowBtn.addEventListener("click", hideShow)
+}
+
+function hideShow(){
+    div = document.getElementById("hideShowDiv")
+    if (div.style.display === 'block'){
+        div.style.display = 'none'
+    }else{
+        div.style.display = 'block'
+    }
 }
 
 function printActivities() {
     act = document.getElementById("activities")
     act.innerHTML = ''
     activities.forEach(element => {
-        div = document.createElement("div")
-        div.append(element.name);
-        act.append(div);
+        divFlex = document.createElement("div")
+        divFlex.setAttribute("class", "activityDiv")
         btn = document.createElement("input")
         btn.type = "button";
         btn.value = "Delete"
         btn.id = element.name
-        act.append(btn);
+        btn.setAttribute("class", "btn-danger")
+        divFlex.append(element.name)
+        divFlex.append(btn)
+        act.append(divFlex);
         addListener(element.name);
     });
 }
@@ -196,7 +207,7 @@ function addCalendarAction() {
         if (Object.keys(json).includes("KO")) {
             console.log("error")
         }
-
+        location.reload()
         console.log('parsed json', json)
     }).catch(function (ex) {
         console.log('parsing failed', ex)
