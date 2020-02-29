@@ -23,6 +23,10 @@ public class Activities {
 
     private String description;
 
+    private String color;
+
+    private String textcolor;
+
     public Activities(){
 
     }
@@ -36,10 +40,12 @@ public class Activities {
         this.name = name;
         this.description = description;
     }
-    public Activities(Users users, String name, String description) {
+    public Activities(Users users, String name, String description, String color, String textColor) {
         this.users = users;
         this.name = name;
         this.description = description;
+        this.color = color;
+        this.textcolor = textColor;
     }
 
     public int getId() {
@@ -72,5 +78,21 @@ public class Activities {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getTextcolor() {
+        return textcolor;
+    }
+
+    public void setTextcolor(String textcolor) {
+        this.textcolor = textcolor;
     }
 }

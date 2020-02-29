@@ -2,6 +2,8 @@ var activities = []
 var activity = {
     name: "",
     description: "",
+    color:"",
+    textcolor:"",
 }
 var calendar = {
     activityName: 'test',
@@ -14,6 +16,8 @@ var calendarInfo;
 
 var inputName;
 var inputDes;
+var inputColor;
+var inputTextColor;
 var newActivity = false;
 var newActivityDiv;
 var addActivity;
@@ -55,12 +59,19 @@ window.onload = function () {
 
     inputName = document.getElementById("name");
     inputDes = document.getElementById("description");
+    inputColor = document.getElementById("color");
+    inputTextColor = document.getElementById("textcolor");
+
     newActivityDiv = document.getElementById("newActivity");
     addActivity = document.getElementById("addActivity");
     hideShowBtn = document.getElementById("hideShowBtn");
 
     inputName.addEventListener("change", fillActivity);
     inputDes.addEventListener("change", fillActivity);
+    inputColor.addEventListener("change", fillActivity);
+    inputTextColor.addEventListener("change", fillActivity);
+
+
     newActivityDiv.addEventListener("click", addNewActivityDiv);
     addActivity.addEventListener("click", addActivityAction);
     hideShowBtn.addEventListener("click", hideShow)
@@ -119,6 +130,8 @@ function back(){
 function fillActivity() {
     activity.name = inputName.value;
     activity.description = inputDes.value;
+    activity.color = inputColor.value;
+    activity.textcolor = inputTextColor.value;
 }
 
 function addNewActivityDiv() {

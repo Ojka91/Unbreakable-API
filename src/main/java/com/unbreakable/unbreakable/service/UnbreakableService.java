@@ -4,16 +4,12 @@ import com.unbreakable.unbreakable.persistance.*;
 import com.unbreakable.unbreakable.persistance.Calendar;
 import com.unbreakable.unbreakable.persistance.repositories.*;
 import com.unbreakable.unbreakable.security.SecurityConfig;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.undo.AbstractUndoableEdit;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -74,6 +70,12 @@ public class UnbreakableService {
         Map<String, Object> dto = new LinkedHashMap<String, Object>();
         dto.put("title", calendar.getActivity().getName());
         dto.put("start", calendar.getDate());
+        if(calendar.getColor() != null){
+            dto.put("color", "#"+calendar.getColor());
+        }
+        if(calendar.getTextcolor() != null){
+            dto.put("textColor", "#"+calendar.getTextcolor());
+        }
         return dto;
     }
 
@@ -246,7 +248,7 @@ public class UnbreakableService {
                 activitiesName.add(activity.getName().trim().toUpperCase());
             }
             if (!activitiesName.contains(activities.getName().trim().toUpperCase())) {
-                Activities activityToSave = new Activities(users, activities.getName(), activities.getDescription());
+                Activities activityToSave = new Activities(users, activities.getName(), activities.getDescription(), activities.getColor(), activities.getTextcolor());
                 activitiesRespository.save(activityToSave);
                 return new ResponseEntity<>(makeMap("correct", "Activity " + activities.getName() +
                         " created"), HttpStatus.CREATED);

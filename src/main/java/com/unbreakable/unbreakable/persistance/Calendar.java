@@ -2,12 +2,8 @@ package com.unbreakable.unbreakable.persistance;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.Date;
 
 @Entity
 public class Calendar {
@@ -26,6 +22,10 @@ public class Calendar {
     @JoinColumn(name ="activity_id")
     private Activities activity;
 
+    private String color;
+
+    private String textcolor;
+
     public Calendar(){
 
     }
@@ -34,6 +34,13 @@ public class Calendar {
         this.date = date;
         this.user = user;
         this.activity = activity;
+        if(!activity.getColor().equals(null)){
+            setColor(activity.getColor());
+        }
+        if(!activity.getTextcolor().equals(null)){
+           setTextcolor(activity.getTextcolor());
+        }
+
     }
 
     public int getId() {
@@ -66,5 +73,21 @@ public class Calendar {
 
     public void setActivity(Activities activity) {
         this.activity = activity;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
+    }
+
+    public String getTextcolor() {
+        return textcolor;
+    }
+
+    public void setTextcolor(String textcolor) {
+        this.textcolor = textcolor;
     }
 }
